@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 88" fill="none" aria-hidden="true">
+  <defs>
+    <path id="leaf-lg" fill="#4CAF50" d="M0,0 C-3.2,-5.2 -6.2,-9.2 0,-11.2 C6.2,-9.2 3.2,-5.2 0,0 Z"/>
+    <path id="leaf-md" fill="#43A047" d="M0,0 C-2.2,-4.2 -4.6,-7.4 0,-9 C5.4,-7.4 3,-4.2 0,0 Z"/>
+    <path id="leaf-sm" fill="#81C784" d="M0,0 C-1.5,-3 -2.4,-5 -0.6,-6 C1.2,-5 1.5,-3 0,0 Z"/>
+    <path id="leaf-xl" fill="#66BB6A" d="M0,0 C-4.4,-6.6 -5.8,-10.2 -1.2,-11 C3.4,-10.2 4.4,-6.6 0,0 Z"/>
+    <g id="berry">
+      <circle cx="0" cy="0" r="1.9" fill="#5d3a1b"/>
+      <circle cx="4" cy="-2.6" r="1.9" fill="#5d3a1b"/>
+      <circle cx="-3.4" cy="2" r="1.9" fill="#5d3a1b"/>
+    </g>
+  </defs>
+  <!-- main woody stem: bottom-right corner, curving up-left along the edges -->
+  <path d="M74 76 C66 62, 54 50, 40 36, 28 24, 16 14" stroke="#5c3a1e" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M74 76 C66 62, 54 50, 40 36, 28 24, 16 14" stroke="#6b4423" stroke-width="3.2" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <!-- secondary stem -->
+  <path d="M40 36 C32 28, 24 20, 16 14" stroke="#5c3a1e" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+  <path d="M40 36 C32 28, 24 20, 16 14" stroke="#6b4423" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.85"/>
+  <!-- twiglets (secondary growth) -->
+  <path d="M52 54 C44 46, 34 38, 26 30" stroke="#4a2f18" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+  <path d="M36 46 C28 38, 18 30, 10 24" stroke="#4a2f18" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+  <path d="M60 60 C50 52, 40 44, 30 36" stroke="#4a2f18" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+  <!-- leaf clusters along both stems -->
+  <use href="#leaf-lg" transform="translate(68,70) rotate(-18)"/>
+  <use href="#leaf-xl" transform="translate(62,62) rotate(-10)"/>
+  <use href="#leaf-md" transform="translate(74,64) rotate(-4)"/>
+  <use href="#leaf-sm" transform="translate(66,56) rotate(8)"/>
+  <use href="#leaf-lg" transform="translate(60,48) rotate(14)"/>
+  <use href="#leaf-md" transform="translate(56,42) rotate(-6)"/>
+  <use href="#leaf-xl" transform="translate(64,40) rotate(22)"/>
+  <use href="#leaf-sm" transform="translate(58,34) rotate(-12)"/>
+  <use href="#leaf-lg" transform="translate(52,44) rotate(10)"/>
+  <use href="#leaf-md" transform="translate(46,38) rotate(-8)"/>
+  <use href="#leaf-xl" transform="translate(56,28) rotate(18)"/>
+  <use href="#leaf-sm" transform="translate(50,32) rotate(4)"/>
+  <use href="#leaf-lg" transform="translate(42,46) rotate(-14)"/>
+  <use href="#leaf-md" transform="translate(36,40) rotate(10)"/>
+  <use href="#leaf-xl" transform="translate(46,24) rotate(-6)"/>
+  <use href="#leaf-sm" transform="translate(40,28) rotate(28)"/>
+  <use href="#leaf-lg" transform="translate(30,34) rotate(8)"/>
+  <use href="#leaf-md" transform="translate(48,36) rotate(-22)"/>
+  <use href="#leaf-sm" transform="translate(54,52) rotate(30)"/>
+  <use href="#leaf-xl" transform="translate(38,26) rotate(-18)"/>
+  <!-- berries -->
+  <use href="#berry" transform="translate(52,40)"/>
+  <use href="#berry" transform="translate(42,34)"/>
+</svg>

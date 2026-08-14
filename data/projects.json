@@ -1,0 +1,22 @@
+{
+  "title": "My Projects",
+  "subtitle": "Things I've built and contributed to",
+  "projects": [
+    {
+      "title": "CineFlix Ticket Booking",
+      "emoji": "💻",
+      "description": "A movie ticket booking system built with HTML, CSS, JavaScript, and SQL for seamless seat reservations.",
+      "tags": ["HTML", "CSS", "JavaScript", "SQL"],
+      "url": "https://github.com/veja39/cineflix.git",
+      "linkLabel": "Source Code"
+    },
+    {
+      "title": "academiQ Peer Education",
+      "emoji": "🎓",
+      "description": "An interactive platform for students to share notes, host study groups, and collaborate on projects.",
+      "tags": ["Collaboration", "Education", "Web"],
+      "url": "https://github.com/islam-ahsanul/academiq.git",
+      "linkLabel": "Source Code"
+    }
+  ]
+}

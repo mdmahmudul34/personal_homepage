@@ -1,0 +1,5 @@
+node_modules/
+.checkpoint-J/
+
+PLAN.md
+_fixindent.cjs

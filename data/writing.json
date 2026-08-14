@@ -1,0 +1,42 @@
+{
+  "title": "Writing",
+  "subtitle": "",
+  "intro": "",
+  "categories": [
+    {
+                  "id": "literary",
+      "title": "Literary",
+      "description": "",
+      "href": "writing-literary.html",
+      "items": [
+        {
+          "slug": "",
+          "title": "",
+          "description": "",
+          "date": "",
+          "tags": [],
+          "url": null,
+          "linkLabel": null,
+          "body": [
+            { "type": "paragraph", "text": "" },
+            { "type": "quote", "text": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essays",
+      "title": "Essays",
+      "description": "",
+      "href": "writing-essays.html",
+      "items": []
+    },
+    {
+      "id": "technical",
+      "title": "Technical Writing",
+      "description": "",
+      "href": "writing-technical.html",
+      "items": []
+    }
+  ]
+}

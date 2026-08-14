@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none">
+  <!-- Minimalist circuit-tree: PCB traces forming a tree silhouette -->
+  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+    <!-- Main trunk - vertical trace -->
+    <path d="M12 20 L12 8"/>
+    <!-- Primary branches from trunk -->
+    <path d="M12 12 L8 7"/>
+    <path d="M12 12 L16 7"/>
+    <!-- Secondary branches -->
+    <path d="M8 7 L6 5.5" stroke-width="1.2"/>
+    <path d="M8 7 L5 6" stroke-width="1.2"/>
+    <path d="M16 7 L18 5.5" stroke-width="1.2"/>
+    <path d="M16 7 L19 6" stroke-width="1.2"/>
+    <!-- Left foliage nodes -->
+    <circle cx="6" cy="5.5" r="0.7"/>
+    <circle cx="5" cy="6" r="0.5"/>
+    <!-- Right foliage nodes -->
+    <circle cx="18" cy="5.5" r="0.7"/>
+    <circle cx="19" cy="6" r="0.5"/>
+    <!-- Top canopy node -->
+    <circle cx="12" cy="4" r="0.9"/>
+  </g>
+</svg>

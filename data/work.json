@@ -1,0 +1,35 @@
+{
+  "title": "Work",
+  "subtitle": "",
+  "intro": "",
+  "categories": [
+    {
+                  "id": "research",
+      "title": "Research",
+      "description": "",
+      "href": "work-research.html",
+      "items": []
+    },
+    {
+      "id": "engineering",
+      "title": "Engineering",
+      "description": "",
+      "href": "work-engineering.html",
+      "items": []
+    },
+    {
+      "id": "academic",
+      "title": "Academic / Technical",
+      "description": "",
+      "href": "work-academic.html",
+      "items": []
+    },
+    {
+      "id": "opensource",
+      "title": "Open Source",
+      "description": "",
+      "href": "work-opensource.html",
+      "items": []
+    }
+  ]
+}

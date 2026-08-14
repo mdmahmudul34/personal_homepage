@@ -1,0 +1,30 @@
+{
+  "title": "",
+  "subtitle": "",
+  "hobbies": [
+    {
+      "title": "[HOBBY 1]",
+      "description": "",
+      "image": null,
+      "imageAlt": null
+    },
+    {
+      "title": "[HOBBY 2]",
+      "description": "",
+      "image": null,
+      "imageAlt": null
+    },
+    {
+      "title": "[HOBBY 3]",
+      "description": "",
+      "image": null,
+      "imageAlt": null
+    },
+    {
+      "title": "[HOBBY 4]",
+      "description": "",
+      "image": null,
+      "imageAlt": null
+    }
+  ]
+}

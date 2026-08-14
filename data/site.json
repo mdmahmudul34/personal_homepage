@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "title": "[PLACEHOLDER]",
+    "tagline": "",
+    "copyright": "[PLACEHOLDER]",
+    "email": "[PLACEHOLDER - REPLACE]"
+  },
+  "personal": {
+    "name": "Md. Mahmudul Kabir",
+    "highlight": "Himel",
+    "age": null,
+    "role": "Computer Science Student · Cybersecurity · Blockchain · Cryptography",
+    "university": "",
+    "bio": "I explore secure software, computer vision, and decentralized systems — building thoughtful, environment-first web experiences.",
+    "profileImage": "images/profile.jpg",
+    "profileAlt": "Md. Mahmudul Kabir Himel",
+    "bannerImage": "",
+    "bannerAlt": ""
+  },
+  "education": {
+    "degree": "",
+    "institution": "",
+    "location": ""
+  },
+  "skillGroups": [
+    {
+      "title": "[GROUP 1]",
+      "tags": ["", "", ""]
+    },
+    {
+      "title": "[GROUP 2]",
+      "tags": ["", ""]
+    },
+    {
+      "title": "[GROUP 3]",
+      "tags": ["", "", ""]
+    },
+    {
+      "title": "[GROUP 4]",
+      "tags": ["", ""]
+    }
+  ],
+  "certifications": [
+    {
+      "title": "",
+      "issuer": "",
+      "date": "",
+      "url": null
+    },
+    {
+      "title": "",
+      "issuer": "",
+      "date": "",
+      "url": null
+    },
+    {
+      "title": "",
+      "issuer": "",
+      "date": "",
+      "url": null
+    },
+    {
+      "title": "",
+      "issuer": "",
+      "date": "",
+      "url": null
+    }
+  ],
+  "languages": [
+    {
+      "name": "",
+      "level": ""
+    },
+    {
+      "name": "",
+      "level": ""
+    }
+  ],
+  "links": [
+    { "label": "", "url": null, "icon": "" },
+    { "label": "", "url": null, "icon": "" },
+    { "label": "", "url": null, "icon": "" }
+  ],
+  "navigation": [
+    { "label": "Home", "href": "index.html", "page": "home" },
+    { "label": "Work", "href": "work.html", "page": "work" },
+    { "label": "Writing", "href": "writing.html", "page": "writing" },
+    { "label": "Experience", "href": "experience.html", "page": "experience" },
+    { "label": "About", "href": "about.html", "page": "about" },
+    { "label": "Playground", "href": "playground.html", "page": "playground" },
+    { "label": "Contact", "href": "contact.html", "page": "contact" },
+    { "label": "Elven Dome", "href": "elven-dome.html", "page": "elven-dome", "deferred": true }
+  ],
+  "home": {
+    "spotlight": {
+      "label": "",
+      "description": "",
+      "href": "",
+      "image": null,
+      "imageAlt": null
+    },
+    "featured": [
+      { "label": "", "href": "work.html", "description": "" },
+      { "label": "", "href": "writing.html", "description": "" }
+    ]
+  },
+  "educationTable": {
+    "title": "Studied Area and Participation",
+    "summary": "I have enrolled and studied multiple domains of Computer Science. Below is an overview of my core interested and studied areas.",
+    "columns": ["Domain", "Details", "Things I've learned so far"],
+    "rows": [
+      {
+        "domain": "Software Engineering",
+        "details": "Web and Software development",
+        "learned": "I've done CSE470. I am interested making secured softwares without any loophole to get hacked."
+      },
+      {
+        "domain": "Computer Vision",
+        "details": "Python, OpenCV, CNN models, image processing techniques",
+        "learned": "I've done CSE463: Computer Vision and Fundamentals. I am familiar with Deep Learning models and worked on Skin disease classification with CNN."
+      },
+      {
+        "domain": "Cybersecurity",
+        "details": "Basics of security and Linux",
+        "learned": "I've completed the Introduction to Computer Security course. Still learning new things."
+      },
+      {
+        "domain": "Cryptography",
+        "details": "Cryptographic protocols and Encryption",
+        "learned": "I've done 1 course and finished lectures of US based university. I've learned the basics of Cryptography."
+      },
+      {
+        "domain": "Blockchain",
+        "details": "Smart contracts, Blockchain fundamentals, Ledger, Ethereum, Bitcoin, Consensus Protocol",
+        "learned": "Enrolled in CSE446 and learning fundamentals of Blockchain. I've done a experimental project with Hyperledger fabric. Currently building a decentralized app."
+      },
+      {
+        "domain": "Hackathon",
+        "details": "AI hackathon, 2025",
+        "learned": "Prompt engineering and Context engineering."
+      }
+    ]
+  }
+}

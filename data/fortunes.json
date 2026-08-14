@@ -1,0 +1,48 @@
+{
+  "messages": [
+    "Your future is bright!",
+    "Adventure awaits you.",
+    "A fresh start will put you on your way.",
+    "Believe in yourself and others will too.",
+    "Change is coming—embrace it.",
+    "Happiness begins with a smile.",
+    "Opportunities are closer than they appear.",
+    "Success comes to those who never quit.",
+    "Today is your lucky day!",
+    "You will receive good news soon."
+  ],
+  "presets": [
+    {
+      "label": "Forest",
+      "background": "#1b4332",
+      "color": "#d8f3dc",
+      "border": "#40916c",
+      "fontSize": "20px",
+      "fontFamily": "Arial, sans-serif"
+    },
+    {
+      "label": "Sunset",
+      "background": "#7f1d1d",
+      "color": "#fef3c7",
+      "border": "#f59e0b",
+      "fontSize": "22px",
+      "fontFamily": "Georgia, serif"
+    },
+    {
+      "label": "Neon",
+      "background": "#1e1b4b",
+      "color": "#a5f3fc",
+      "border": "#22d3ee",
+      "fontSize": "18px",
+      "fontFamily": "'Courier New', monospace"
+    },
+    {
+      "label": "Classic",
+      "background": "#14532d",
+      "color": "#fef08a",
+      "border": "#4ade80",
+      "fontSize": "24px",
+      "fontFamily": "Tahoma, sans-serif"
+    }
+  ]
+}
