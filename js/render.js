@@ -141,17 +141,15 @@ function renderFooter(site, currentPage = "") {
       <div class="footer-wave-left"></div>
       <div class="footer-wave-right"></div>
     </div>
-    <div class="footer-voight" aria-hidden="true">
-      <span class="voight-label">voight kompff ::</span>
-      <div class="voight-feed"></div>
-      <span class="voight-dots"><span></span><span></span><span></span></span>
-    </div>
     <div class="footer-top">
       <div class="footer-brand">
         <span class="footer-brand-icon" aria-hidden="true">${iconTreeCeltic()}</span>
         <div class="footer-brand-text">
           <p class="footer-name">${escapeHtml(name)}</p>
-          <p class="footer-tagline">${escapeHtml(tagline)}</p>
+          <p class="footer-tagline">
+            <span class="footer-tagline-lg">${escapeHtml(tagline)}</span>
+            <span class="footer-tagline-sm">CS Student · Cybersecurity · Blockchain · Cryptography</span>
+          </p>
         </div>
       </div>
 
@@ -163,10 +161,17 @@ function renderFooter(site, currentPage = "") {
       </nav>
 
       <div class="footer-status" aria-label="System status">
-        <p class="footer-label"><span class="footer-dot footer-dot--pulse" aria-hidden="true"></span>System Status</p>
-        <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> whoami <span class="term-sep" aria-hidden="true">→</span> <span class="term-value">${escapeHtml(name)}</span></p>
-        <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> locate <span class="term-sep" aria-hidden="true">→</span> <span class="term-value">${escapeHtml(path)}</span></p>
-        <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> theme <span class="term-sep" aria-hidden="true">→</span> <span class="term-value term-theme">${isDark ? "dark" : "light"}</span><span class="term-cursor" aria-hidden="true">▍</span></p>
+        <div class="footer-status-text">
+          <p class="footer-label"><span class="footer-dot footer-dot--pulse" aria-hidden="true"></span>System Status</p>
+          <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> whoami <span class="term-sep" aria-hidden="true">→</span> <span class="term-value"><span class="term-who-lg">${escapeHtml(name)}</span><span class="term-who-sm">Himel</span></span></p>
+          <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> locate <span class="term-sep" aria-hidden="true">→</span> <span class="term-value">${escapeHtml(path)}</span></p>
+          <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> theme <span class="term-sep" aria-hidden="true">→</span> <span class="term-value term-theme">${isDark ? "dark" : "light"}</span><span class="term-cursor" aria-hidden="true">▍</span></p>
+        </div>
+        <div class="footer-voight" aria-hidden="true">
+          <span class="voight-label">voight kompff ::</span>
+          <div class="voight-feed"></div>
+          <span class="voight-dots"><span></span><span></span><span></span></span>
+        </div>
       </div>
     </div>
 
@@ -1008,7 +1013,10 @@ function initVoightFeed() {
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const TRANS = reduced ? "none" : "opacity 0.55s ease, transform 0.55s ease";
-  const MAX = 5;
+  // Compact on phones: keep fewer feed lines so the Voight panel stays short and
+  // balances the SYSTEM STATUS column height (mobile two-column footer layout).
+  const MAX =
+    window.matchMedia("(max-width: 720px)").matches ? 3 : 5;
 
   function step() {
     const pair = VOIGHT_POOL[Math.floor(Math.random() * VOIGHT_POOL.length)];

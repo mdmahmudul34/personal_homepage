@@ -2254,6 +2254,11 @@ body.dark .icon-tree-animated {
   font-size: 0.85rem;
 }
 
+/* Mobile-only compact phrasing ("CS Student") — desktop keeps the full role line. */
+.footer-tagline-sm {
+  display: none;
+}
+
 .footer-label {
   margin: 0 0 0.6rem;
   font-family: var(--font-mono);
@@ -2343,6 +2348,11 @@ body.dark .icon-tree-animated {
   font-weight: 500;
 }
 
+/* Compact mobile-only "Himel" value for `whoami` — desktop keeps the full name. */
+.term-who-sm {
+  display: none;
+}
+
 .dark .term-value {
   color: var(--accent);
 }
@@ -2423,11 +2433,20 @@ body.dark .icon-tree-animated {
     drop-shadow(0 0 6px rgba(140, 210, 170, 0.12));
 }
 
+/* ── Footer responsive — phone-first adaptation of the same composition ────────
+   Keeps the existing identity (tree, name, Explore, System Status, Voight,
+   copyright, LEAF origin) and only compacts spacing + reflows layout on narrow
+   viewports. Desktop/tablet above this breakpoint is untouched. */
 @media (max-width: 720px) {
+  footer {
+    padding: 0.9rem 1rem 0.8rem;
+  }
+
   .footer-top {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 0.5rem;
     text-align: center;
+    padding-bottom: 0.8rem;
   }
 
   .footer-brand,
@@ -2437,8 +2456,190 @@ body.dark .icon-tree-animated {
     justify-content: center;
   }
 
+  .footer-brand {
+    flex-wrap: wrap;
+    gap: 0.1rem 0.45rem;
+    align-items: center;
+  }
+
+  /* Logo + name become the two items of ONE centered group; the tag is a
+     separate centered line. This centers the combined [tree + name] together. */
+  .footer-brand-text {
+    display: contents;
+  }
+
+  /* Align the tree/logo flush with the name so they read as one unit. */
+  .footer-brand-icon {
+    margin-top: 0;
+  }
+
+  /* Give the tree roughly the same visual weight as the name (not a tiny
+     decorative dot, not a towering sprite) so TREE + NAME read as one stamp. */
+  .footer-brand-icon .icon,
+  .footer-brand-icon .footer-tree,
+  .footer-brand-icon canvas {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  /* Compact, cohesive identity unit — name strongest, tags secondary. */
+  .footer-name {
+    font-size: 0.88rem;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+  .footer-tagline {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  /* Slightly tighter breathing room around the Explore heading → its links. */
+  .footer-nav .footer-label {
+    margin-bottom: 0.35rem;
+  }
+
+  /* Swap the long role wording for the compact "CS Student" phrasing. */
+  .footer-tagline-lg {
+    display: none;
+  }
+  .footer-tagline-sm {
+    display: block;
+    font-size: 0.66rem;
+    line-height: 1.2;
+  }
+
+  .footer-links {
+    gap: 0.15rem 0.7rem;
+  }
+
+  /* SYSTEM STATUS — compact terminal box (short, dense but readable). */
+  /* Keep the OS spacing above the box unchanged even though the footer-top row
+     gap was reduced to tighten only the identity→Explore gap (see Stage 2). */
+  .footer-status {
+    display: flex;
+    align-items: stretch;
+    gap: 0.45rem;
+    text-align: left;
+    margin-top: 0.2rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--footer-border);
+    border-radius: 6px;
+    background: var(--footer-accent-bg);
+  }
+  .footer-status-text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .footer-status .footer-label {
+    margin-bottom: 0.12rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+  }
   .footer-status .term-line {
     white-space: normal;
+    margin: 0.04rem 0;
+    font-size: 0.62rem;
+    line-height: 1.2;
+  }
+  .footer-status .term-prompt {
+    margin-right: 0.2rem;
+  }
+  .footer-status .term-sep {
+    margin: 0 0.18rem;
+  }
+  .footer-status .term-cursor {
+    display: none;
+  }
+
+  /* Compact `whoami` value on mobile — "Himel" instead of the full name. */
+  .term-who-lg {
+    display: none;
+  }
+  .term-who-sm {
+    display: inline;
+  }
+
+  /* VOIGHT — smaller panel + tighter internal rhythm to keep the box short. */
+  .footer-voight {
+    flex: 0 0 auto;
+    position: static;
+    width: auto;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    padding-left: 0.5rem;
+    border-left: 1px solid var(--footer-border);
+  }
+  .footer-voight .voight-label {
+    text-align: right;
+    font-size: 0.46rem;
+    line-height: 1.15;
+  }
+  .footer-voight .voight-feed {
+    margin-top: 0.05rem;
+    gap: 0;
+  }
+  .footer-voight .voight-entry {
+    font-size: 0.44rem;
+    line-height: 1.15;
+  }
+  .footer-voight .voight-dots {
+    margin-top: 0.08rem;
+    justify-content: flex-end;
+  }
+
+  /* Copyright + text links share one inline line. */
+  .footer-copy {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    gap: 0.1rem 0.75rem;
+    padding-top: 0.45rem;
+  }
+
+  /* LEAF / origin metadata — compact single line. */
+  .footer-meta {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+  #footer-globe {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Very narrow phones — ease off nowrap so nothing gets clipped or overflows. */
+@media (max-width: 400px) {
+  .footer-copy {
+    white-space: normal;
+    font-size: 0.78rem;
+  }
+  .footer-meta {
+    white-space: normal;
+    font-size: 0.6rem;
+  }
+  .footer-status .term-line {
+    font-size: 0.58rem;
+  }
+  .footer-status {
+    gap: 0.5rem;
+    padding: 0.3rem 0.45rem;
+  }
+  .footer-status .footer-label {
+    font-size: 0.56rem;
+  }
+  .footer-voight {
+    padding-left: 0.5rem;
   }
 }
 
