@@ -82,7 +82,7 @@
     { "label": "", "url": null, "icon": "" }
   ],
   "navigation": [
-    { "label": "Home", "href": "index.html", "page": "home" },
+    { "label": "Root", "href": "index.html", "page": "home" },
     { "label": "Work", "href": "work.html", "page": "work" },
     { "label": "Writing", "href": "writing.html", "page": "writing" },
     { "label": "Experience", "href": "experience.html", "page": "experience" },

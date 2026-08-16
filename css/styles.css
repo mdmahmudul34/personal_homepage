@@ -15,6 +15,8 @@
   --footer-text: #1a1f1c;
   --footer-border: rgba(67, 160, 71, 0.25);
   --footer-accent-bg: rgba(67, 160, 71, 0.08);
+  --footer-tagline: #c0923f;
+  --footer-tagline-opacity: 0.84;
   --neon-green: #39ff14;
   --neon-green-rgb: 57, 255, 20;
   --radius: 12px;
@@ -58,6 +60,8 @@
   --footer-text: #b8c4bc;
   --footer-border: rgba(255, 255, 255, 0.14);
   --footer-accent-bg: rgba(61, 154, 98, 0.1);
+  --footer-tagline: #e8d5b0;
+  --footer-tagline-opacity: 0.85;
   --icon-leaf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235cb888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22V12'/%3E%3Cpath d='M12 12C12 6 7 2 4 2c0 5 4 9 8 10'/%3E%3Cpath d='M12 12c0-6 5-10 8-10 0 5-4 9-8 10'/%3E%3C/svg%3E");
   --table-header: #142019;
   --table-row-alt: #101613;
@@ -233,28 +237,94 @@ body.content-ready main {
 }
 
 /* Theme-toggle symbol is theme-driven via CSS (NOT JS text-swap).
-   The HTML ships both symbols; the theme class on <html> (set by the inline
-   head script BEFORE first paint) decides which one is visible. This makes the
-   correct symbol appear from the very first frame — no flash of the opposite
-   theme's symbol while JavaScript initializes.
-   Light mode (default): show the moon (🌙 = currently light, switch to dark).
-   Dark mode (.dark on <html>/<body>): show the sun (☀️ = currently dark). */
+   The HTML ships both icons; the theme class on <html> (set by the inline
+   head script BEFORE first paint) decides which one is visible so the correct
+   icon appears from the very first frame — no flash of the other state.
+   ACTIVE-THEME mapping: LIGHT mode shows the Sun (day), DARK mode shows the
+   crescent Moon (night). Each gets its own warm-solar / cool-lunar color
+   character plus a soft, contained glow — not a glow on the whole button. */
 #theme-toggle .icon-sun,
 #theme-toggle .icon-moon {
   display: inline-block;
+  line-height: 0;
 }
 
+/* LIGHT (default): the Sun is active. */
 #theme-toggle .icon-sun {
-  display: none;
+  display: inline-block;
 }
 #theme-toggle .icon-moon {
-  display: inline-block;
+  display: none;
 }
+
+/* DARK: the crescent Moon is active. */
 .dark #theme-toggle .icon-sun {
-  display: inline-block;
+  display: none;
 }
 .dark #theme-toggle .icon-moon {
-  display: none;
+  display: inline-block;
+}
+
+/* Icon sizing — SVG replaces the emoji; keep dimensions close to the old
+   glyph so the toggle footprint stays unchanged. */
+#theme-toggle .icon-sun svg,
+#theme-toggle .icon-moon svg {
+  display: block;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+/* Sun sits a touch larger than the moon — more energetic in light mode. */
+#theme-toggle .icon-sun svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+#theme-toggle .icon-moon svg {
+  width: 1.04rem;
+  height: 1.04rem;
+}
+
+/* LIGHT MODE — SUN (bright elegant gold, soft warm radiance). */
+#theme-toggle .icon-sun svg {
+  filter: drop-shadow(0 0 1px rgba(232, 200, 114, 0.55))
+          drop-shadow(0 0 4px rgba(240, 215, 140, 0.32));
+  animation: theme-sun-breathe 6s ease-in-out infinite;
+}
+
+/* DARK MODE — MOON (soft cream, delicate gentle moonlight glow). */
+#theme-toggle .icon-moon svg {
+  filter: drop-shadow(0 0 1px rgba(245, 240, 230, 0.5))
+          drop-shadow(0 0 4px rgba(234, 223, 196, 0.3));
+  animation: theme-moon-breathe 6s ease-in-out infinite;
+}
+
+/* Gentle, restrained ambient glow — never neon, never a giant bloom. */
+@keyframes theme-sun-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 1px rgba(232, 200, 114, 0.5))
+            drop-shadow(0 0 3px rgba(240, 215, 140, 0.26));
+  }
+  50% {
+    filter: drop-shadow(0 0 1.5px rgba(232, 200, 114, 0.6))
+            drop-shadow(0 0 5px rgba(240, 215, 140, 0.38));
+  }
+}
+@keyframes theme-moon-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 1px rgba(245, 240, 230, 0.42))
+            drop-shadow(0 0 3px rgba(234, 223, 196, 0.22));
+  }
+  50% {
+    filter: drop-shadow(0 0 1.5px rgba(245, 240, 230, 0.52))
+            drop-shadow(0 0 5px rgba(234, 223, 196, 0.34));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #theme-toggle .icon-sun svg,
+  #theme-toggle .icon-moon svg {
+    animation: none;
+  }
 }
 
 #theme-toggle:hover {
@@ -736,7 +806,8 @@ section {
    It sits behind the card content (z-index 1), stays partially cropped by
    the card edge, and does NOT change to the fern (the fern is a separate,
    hover-only top-left detail). */
-.universe-card.card-hover-accent::after {
+.universe-card.card-hover-accent::after,
+.hobby-card::after {
   content: "";
   position: absolute;
   z-index: 1;
@@ -788,7 +859,7 @@ section {
 
 /* OPEN SOURCE — BOTTOM-LEFT (static, unchanged reference) */
 .universe-grid > .universe-card:nth-child(4)::after {
-  top: 55%;
+  top: 58%;
   left: -28px;
   width: 96px;
   height: 132px;
@@ -796,19 +867,37 @@ section {
   mask-position: 0 50%;
 }
 
+/* ABOUT HOBBY cards — reuse the EXACT Work/Writing static branches foliage
+   (same --growth-branches asset/color, opacity, scale). Placed bottom-right to
+   mirror the Academic card's anchoring: stays visible over the card body and
+   clear of the hobby card's bottom-left hover vine. */
+.hobby-gallery > .hobby-card::after {
+  bottom: -14px;
+  right: -14px;
+  width: 104px;
+  height: 118px;
+  transform-origin: 100% 100%;
+  transform: rotate(-48deg);
+  -webkit-mask-position: 100% 100%;
+  mask-position: 100% 100%;
+}
+
 /* Static foliage hover: only becomes slightly more present — the card's
    existing lift/border glow stays the primary interaction. */
-.universe-card.card-hover-accent:hover::after {
+.universe-card.card-hover-accent:hover::after,
+.hobby-card:hover::after {
   opacity: 0.5;
 }
 
 /* Dark mode: deep muted forest green (slightly brighter than the card
    background) with a very soft green ambient illumination. No neon. */
-.dark .universe-card.card-hover-accent::after {
+.dark .universe-card.card-hover-accent::after,
+.dark .hobby-card::after {
   filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.22));
 }
 
-.dark .universe-card.card-hover-accent:hover::after {
+.dark .universe-card.card-hover-accent:hover::after,
+.dark .hobby-card:hover::after {
   filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.32));
 }
 
@@ -2249,8 +2338,8 @@ body.dark .icon-tree-animated {
 
 .footer-tagline {
   margin: 0.2rem 0 0;
-  color: var(--text-muted);
-  opacity: 0.72;
+  color: var(--footer-tagline);
+  opacity: var(--footer-tagline-opacity);
   font-size: 0.85rem;
 }
 
@@ -2439,14 +2528,14 @@ body.dark .icon-tree-animated {
    viewports. Desktop/tablet above this breakpoint is untouched. */
 @media (max-width: 720px) {
   footer {
-    padding: 0.9rem 1rem 0.8rem;
+    padding: 0.75rem 1rem 0.65rem;
   }
 
   .footer-top {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.4rem;
     text-align: center;
-    padding-bottom: 0.8rem;
+    padding-bottom: 0.65rem;
   }
 
   .footer-brand,
@@ -2458,7 +2547,7 @@ body.dark .icon-tree-animated {
 
   .footer-brand {
     flex-wrap: wrap;
-    gap: 0.1rem 0.45rem;
+    gap: 0.06rem 0.45rem;
     align-items: center;
   }
 
@@ -2497,7 +2586,7 @@ body.dark .icon-tree-animated {
 
   /* Slightly tighter breathing room around the Explore heading → its links. */
   .footer-nav .footer-label {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.28rem;
   }
 
   /* Swap the long role wording for the compact "CS Student" phrasing. */
@@ -2511,7 +2600,7 @@ body.dark .icon-tree-animated {
   }
 
   .footer-links {
-    gap: 0.15rem 0.7rem;
+    gap: 0.12rem 0.7rem;
   }
 
   /* SYSTEM STATUS — compact terminal box (short, dense but readable). */
@@ -2522,8 +2611,8 @@ body.dark .icon-tree-animated {
     align-items: stretch;
     gap: 0.45rem;
     text-align: left;
-    margin-top: 0.2rem;
-    padding: 0.15rem 0.5rem;
+    margin-top: 0.16rem;
+    padding: 0.11rem 0.5rem;
     border: 1px solid var(--footer-border);
     border-radius: 6px;
     background: var(--footer-accent-bg);
@@ -2533,13 +2622,14 @@ body.dark .icon-tree-animated {
     min-width: 0;
   }
   .footer-status .footer-label {
-    margin-bottom: 0.12rem;
+    justify-content: flex-start;
+    margin-bottom: 0.08rem;
     font-size: 0.6rem;
     letter-spacing: 0.14em;
   }
   .footer-status .term-line {
     white-space: normal;
-    margin: 0.04rem 0;
+    margin: 0.03rem 0;
     font-size: 0.62rem;
     line-height: 1.2;
   }
@@ -2601,8 +2691,8 @@ body.dark .icon-tree-animated {
 
   .footer-bottom {
     justify-content: center;
-    gap: 0.1rem 0.75rem;
-    padding-top: 0.45rem;
+    gap: 0.06rem 0.75rem;
+    padding-top: 0.36rem;
   }
 
   /* LEAF / origin metadata — compact single line. */
@@ -2979,7 +3069,8 @@ body.dark .icon-tree-animated {
   .spotlight-card::before,
   .hobby-card::before,
   .featured-card::before,
-  .universe-card.card-hover-accent::after {
+  .universe-card.card-hover-accent::after,
+  .hobby-card::after {
     transition: none;
   }
 
@@ -2993,14 +3084,17 @@ body.dark .icon-tree-animated {
     clip-path: inset(0 round 3px);
   }
 
-  .universe-card.card-hover-accent:hover::after {
+  .universe-card.card-hover-accent:hover::after,
+  .hobby-card:hover::after {
     opacity: 1;
   }
 
   /* Fern: under reduced-motion, keep the fern at full size in both states so
      hover only fades it in/out (color-only cue, no grow/scale motion). */
   .universe-card.card-hover-accent::after,
-  .universe-card.card-hover-accent:hover::after {
+  .universe-card.card-hover-accent:hover::after,
+  .hobby-card::after,
+  .hobby-card:hover::after {
     transform: scale(1) rotate(var(--fern-rotate, 0deg));
   }
 
@@ -3536,6 +3630,23 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
   background-color: #1b2a1e;
 }
 
+/* PC homepage only — reproduce the SVG's ORIGINAL full-screen fit.
+   The artwork has a native aspect of viewBox 335.171x186.206 (~1.8:1, i.e.
+   ~16:9), so on a full-width desktop hero it is meant to fill the whole screen.
+   Matching the scene container to the SVG's OWN aspect ratio lets the existing
+   `background-size: cover` tile the artwork edge-to-edge at its true
+   proportions — full width, full height reachable at all four edges, no
+   vertical crop, no distortion, no "smaller image" margins. Mobile and tablet
+   keep their existing treatment above. */
+@media (min-width: 1025px) {
+  #home-env.home-env {
+    aspect-ratio: 335.171 / 186.206;
+  }
+  .home-scene {
+    background-size: cover;
+  }
+}
+
 /* Subtle atmospheric wash for legibility — same treatment as the inner-page
    scenes: pale daylight mist (light mode), deeper night veil (dark mode). */
 .home-scene::before {
@@ -3680,6 +3791,14 @@ body:not(.dark) .home-hero .home-hero-greeting {
   }
   .home-hero-actions {
     justify-content: center;
+  }
+  /* Mobile/phone only: give the SVG-scene "body" ~12% more vertical height.
+     The `.home-scene` fills `#home-env` (absolute inset:0), so raising the
+     section's min-height grows the scene container. Base `.hero` min-height is
+    60vh → ~67vh (×1.12). Applies to both light and dark via this breakpoint;
+    desktop/tablet are untouched. */
+  #hero.home-hero {
+    min-height: 67vh;
   }
   .home-scene {
     background-position: center 30%;
