@@ -717,8 +717,8 @@ function renderAboutPage(site, hobbies) {
       <div class="hobby-gallery reveal delay">
         ${hobbies.hobbies
           .map(
-            (hobby) => `
-          <article class="hobby-card">
+            (hobby, i) => `
+          <article class="hobby-card card-hover-accent reveal${i === 1 ? " delay" : i >= 2 ? " delay2" : ""}">
             ${hobby.image ? `<img src="${escapeHtml(hobby.image)}" alt="${escapeHtml(hobby.imageAlt || hobby.title)}" loading="lazy" />` : `<div class="hobby-placeholder">${escapeHtml(hobby.title.charAt(0))}</div>`}
             <div class="hobby-body">
               <h3>${escapeHtml(hobby.title)}</h3>

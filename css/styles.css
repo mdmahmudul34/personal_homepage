@@ -192,13 +192,17 @@ body.content-ready main {
 /* Actual tree illustration (tree-with-thin-branches-and-small-dots-foliage-svgrepo-com.svg)
    rendered inline beside the brand name. Inherits the brand theme color via currentColor
    and matches the green header palette. */
-.brand .brand-tree {
+/* .brand .brand-tree {
   width: 30px;
   height: 30px;
   flex: 0 0 auto;
   display: inline-block;
   fill: currentColor;
   color: inherit;
+} */
+/* Leaf/logo is OFF — hidden but retained in HTML */
+.brand .brand-tree {
+  display: none !important;
 }
 
 /* Very subtle "signal" shimmer — gentle luminosity drift on the foliage */
@@ -211,13 +215,102 @@ body.content-ready main {
     opacity: 1;
   }
 }
-.brand .brand-tree {
+/* .brand .brand-tree {
   animation: brand-tree-signal 4.5s ease-in-out infinite;
-}
+} */
 
 .brand .highlight {
   color: #e8f5e9;
 }
+
+/* Refined name sparkle — sparse, mild, premium.
+   Sparkles appear around "Himel Kabir" via pseudo-elements.
+   Each theme gets its own color palette and glow. */
+
+.brand {
+  /* position: relative; */
+}
+
+/* Shared keyframe for subtle sparkle pulse */
+@keyframes brand-sparkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85) translate(0, 0);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+/* Dark mode — bio-luminescent: cool green to soft cyan-green */
+/* .dark .brand::before,
+.dark .brand::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px rgba(110, 200, 180, 0.5);
+  animation: brand-sparkle 6s ease-in-out infinite;
+  pointer-events: none;
+} */
+
+/* .dark .brand::before {
+  top: -2px;
+  left: -6px;
+  background: rgba(110, 200, 180, 0.45);
+  animation-delay: 0s;
+} */
+
+/* .dark .brand::after {
+  bottom: 1px;
+  right: -8px;
+  background: rgba(90, 190, 210, 0.4);
+  animation-delay: 2.5s;
+} */
+
+/* Light mode — warm champagne gold */
+/* .brand::before,
+.brand::after {
+  content: "";
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px 1px rgba(245, 220, 150, 0.45);
+  animation: brand-sparkle 7s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0;
+} */
+
+/* .dark .brand::before,
+.dark .brand::after {
+  opacity: 0.35;
+} */
+
+/* .brand:not(.dark)::before {
+  top: -2px;
+  left: -6px;
+  background: rgba(245, 220, 150, 0.4);
+  animation-delay: 0s;
+} */
+
+/* .brand:not(.dark)::after {
+  bottom: 1px;
+  right: -8px;
+  background: rgba(225, 200, 130, 0.35);
+  animation-delay: 2s;
+} */
+
+/* Ensure light-mode sparkles are visible on the .brand anchor (not .dark) */
+/* @media (prefers-color-scheme: light) {
+  .brand::before,
+  .brand::after {
+    opacity: 0.35;
+  }
+} */
 
 .header-actions {
   display: flex;
@@ -226,110 +319,92 @@ body.content-ready main {
 }
 
 #theme-toggle {
+  position: relative;
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 8px;
-  padding: 0.4rem 0.6rem;
-  font-size: 1.1rem;
+  width: 2.4rem;
+  height: 2rem;
+  padding: 0;
   cursor: pointer;
   transition: background var(--transition), transform 0.2s;
   backdrop-filter: blur(8px);
+  overflow: hidden;
 }
 
-/* Theme-toggle symbol is theme-driven via CSS (NOT JS text-swap).
-   The HTML ships both icons; the theme class on <html> (set by the inline
-   head script BEFORE first paint) decides which one is visible so the correct
-   icon appears from the very first frame — no flash of the other state.
-   ACTIVE-THEME mapping: LIGHT mode shows the Sun (day), DARK mode shows the
-   crescent Moon (night). Each gets its own warm-solar / cool-lunar color
-   character plus a soft, contained glow — not a glow on the whole button. */
-#theme-toggle .icon-sun,
-#theme-toggle .icon-moon {
-  display: inline-block;
-  line-height: 0;
+/* Sun / Moon via CSS background-image with layered glow.
+   LIGHT = sun-svgrepo-com.svg (warm golden/amber solar radiance)
+   DARK  = moon-dreamy-svgrepo-com.svg (soft creamy lunar glow) */
+#theme-toggle::before,
+#theme-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.2rem 1.2rem;
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
-/* LIGHT (default): the Sun is active. */
-#theme-toggle .icon-sun {
-  display: inline-block;
-}
-#theme-toggle .icon-moon {
-  display: none;
-}
-
-/* DARK: the crescent Moon is active. */
-.dark #theme-toggle .icon-sun {
-  display: none;
-}
-.dark #theme-toggle .icon-moon {
-  display: inline-block;
+/* LIGHT MODE — Sun active */
+#theme-toggle::before {
+  background-image: url('assets/growth/sun-svgrepo-com.svg');
+  opacity: 1;
+  filter:
+    sepia(0.35)
+    saturate(1.7)
+    brightness(1.1)
+    drop-shadow(0 0 1px rgba(245, 220, 150, 0.9))
+    drop-shadow(0 0 3px rgba(240, 210, 130, 0.6))
+    drop-shadow(0 0 7px rgba(235, 200, 110, 0.35))
+    drop-shadow(0 0 14px rgba(225, 190, 100, 0.18));
 }
 
-/* Icon sizing — SVG replaces the emoji; keep dimensions close to the old
-   glyph so the toggle footprint stays unchanged. */
-#theme-toggle .icon-sun svg,
-#theme-toggle .icon-moon svg {
-  display: block;
-  transition: filter 0.5s ease, opacity 0.5s ease;
-}
-/* Sun sits a touch larger than the moon — more energetic in light mode. */
-#theme-toggle .icon-sun svg {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-#theme-toggle .icon-moon svg {
-  width: 1.04rem;
-  height: 1.04rem;
+#theme-toggle::after {
+  background-image: url('assets/growth/moon-dreamy-svgrepo-com.svg');
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* LIGHT MODE — SUN (bright elegant gold, soft warm radiance). */
-#theme-toggle .icon-sun svg {
-  filter: drop-shadow(0 0 1px rgba(232, 200, 114, 0.55))
-          drop-shadow(0 0 4px rgba(240, 215, 140, 0.32));
-  animation: theme-sun-breathe 6s ease-in-out infinite;
+/* DARK MODE — Moon active */
+.dark #theme-toggle::before {
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* DARK MODE — MOON (soft cream, delicate gentle moonlight glow). */
-#theme-toggle .icon-moon svg {
-  filter: drop-shadow(0 0 1px rgba(245, 240, 230, 0.5))
-          drop-shadow(0 0 4px rgba(234, 223, 196, 0.3));
-  animation: theme-moon-breathe 6s ease-in-out infinite;
-}
-
-/* Gentle, restrained ambient glow — never neon, never a giant bloom. */
-@keyframes theme-sun-breathe {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 1px rgba(232, 200, 114, 0.5))
-            drop-shadow(0 0 3px rgba(240, 215, 140, 0.26));
-  }
-  50% {
-    filter: drop-shadow(0 0 1.5px rgba(232, 200, 114, 0.6))
-            drop-shadow(0 0 5px rgba(240, 215, 140, 0.38));
-  }
-}
-@keyframes theme-moon-breathe {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 1px rgba(245, 240, 230, 0.42))
-            drop-shadow(0 0 3px rgba(234, 223, 196, 0.22));
-  }
-  50% {
-    filter: drop-shadow(0 0 1.5px rgba(245, 240, 230, 0.52))
-            drop-shadow(0 0 5px rgba(234, 223, 196, 0.34));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #theme-toggle .icon-sun svg,
-  #theme-toggle .icon-moon svg {
-    animation: none;
-  }
+.dark #theme-toggle::after {
+  opacity: 1;
+  filter:
+    brightness(1.4)
+    sepia(0.3)
+    saturate(0.7)
+    drop-shadow(0 0 1px rgba(245, 240, 225, 0.7))
+    drop-shadow(0 0 4px rgba(235, 225, 200, 0.4))
+    drop-shadow(0 0 10px rgba(220, 210, 185, 0.2));
 }
 
 #theme-toggle:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: scale(1.05);
+}
+
+.dark #theme-toggle:hover {
+  box-shadow:
+    0 0 6px rgba(var(--accent-rgb), 0.5),
+    0 0 14px rgba(var(--accent-rgb), 0.3),
+    0 0 24px rgba(var(--accent-rgb), 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #theme-toggle::before,
+  #theme-toggle::after {
+    transition: none;
+  }
+  /* .brand::before,
+  .brand::after {
+    animation: none;
+    opacity: 0.4;
+  } */
 }
 
 #nav-toggle {
@@ -868,36 +943,95 @@ section {
 }
 
 /* ABOUT HOBBY cards — reuse the EXACT Work/Writing static branches foliage
-   (same --growth-branches asset/color, opacity, scale). Placed bottom-right to
-   mirror the Academic card's anchoring: stays visible over the card body and
-   clear of the hobby card's bottom-left hover vine. */
-.hobby-gallery > .hobby-card::after {
-  bottom: -14px;
-  right: -14px;
-  width: 104px;
-  height: 118px;
+   (same --growth-branches asset/color, opacity, scale). Per-card positioning
+   mirrors the universe cards: 1=top-right, 2=bottom-left, 3=bottom-right, 4=bottom-left. */
+.hobby-gallery > .hobby-card.card-hover-accent::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background-color: var(--growth-branches-color);
+  -webkit-mask-image: var(--growth-branches);
+  mask-image: var(--growth-branches);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  opacity: 0.3;
+  transition: opacity 420ms ease, filter 420ms ease;
+}
+
+/* Hobby 1 — TOP-RIGHT (mirrors Research) — pushed left */
+.hobby-gallery > .hobby-card.card-hover-accent:nth-child(1)::after {
+  top: -18px;
+  right: -40px;
+  width: 132px;
+  height: 158px;
+  transform-origin: 100% 0;
+  transform: rotate(-27deg);
+}
+
+/* Hobby 2 — BOTTOM-LEFT (mirrors Engineering) — pushed up */
+.hobby-gallery > .hobby-card.card-hover-accent:nth-child(2)::after {
+  bottom: 8px;
+  left: -12px;
+  width: 96px;
+  height: 104px;
+  transform-origin: 0 100%;
+  transform: rotate(0deg);
+  -webkit-mask-position: 0 100%;
+  mask-position: 0 100%;
+}
+
+/* Hobby 3 — BOTTOM-RIGHT (mirrors Academic) — pushed up */
+.hobby-gallery > .hobby-card.card-hover-accent:nth-child(3)::after {
+  bottom: 54px;
+  right: -16px;
+  width: 132px;
+  height: 158px;
   transform-origin: 100% 100%;
   transform: rotate(-48deg);
   -webkit-mask-position: 100% 100%;
   mask-position: 100% 100%;
 }
 
+/* Hobby 4 — BOTTOM-LEFT (mirrors Open Source) — pushed down */
+.hobby-gallery > .hobby-card.card-hover-accent:nth-child(4)::after {
+  top: 68%;
+  left: -28px;
+  width: 96px;
+  height: 132px;
+  -webkit-mask-position: 0 50%;
+  mask-position: 0 50%;
+}
+
+/* Static foliage hover: only becomes slightly more present. */
+.hobby-gallery > .hobby-card.card-hover-accent:hover::after {
+  opacity: 0.5;
+}
+
+/* Dark mode: deep muted forest green with soft ambient illumination. */
+.dark .hobby-gallery > .hobby-card.card-hover-accent::after {
+  filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.22));
+}
+
+.dark .hobby-gallery > .hobby-card.card-hover-accent:hover::after {
+  filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.32));
+}
+
 /* Static foliage hover: only becomes slightly more present — the card's
    existing lift/border glow stays the primary interaction. */
-.universe-card.card-hover-accent:hover::after,
-.hobby-card:hover::after {
+.universe-card.card-hover-accent:hover::after {
   opacity: 0.5;
 }
 
 /* Dark mode: deep muted forest green (slightly brighter than the card
    background) with a very soft green ambient illumination. No neon. */
-.dark .universe-card.card-hover-accent::after,
-.dark .hobby-card::after {
+.dark .universe-card.card-hover-accent::after {
   filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.22));
 }
 
-.dark .universe-card.card-hover-accent:hover::after,
-.dark .hobby-card:hover::after {
+.dark .universe-card.card-hover-accent:hover::after {
   filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.32));
 }
 
@@ -1494,9 +1628,8 @@ section {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-organic-lg);
-  padding: 1.5rem;
   box-shadow: var(--shadow);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   position: relative;
   overflow: visible;
 }
@@ -1505,6 +1638,7 @@ section {
 .hobby-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 
 .project-card h3,
@@ -1554,30 +1688,27 @@ section {
 }
 
 .hobby-card {
+  display: flex;
+  flex-direction: column;
   padding: 0;
+  min-height: 220px;
 }
 
-.hobby-card img {
+.hobby-card img,
+.hobby-placeholder {
   width: 100%;
   height: 180px;
   object-fit: cover;
   border-radius: var(--radius-organic-lg) var(--radius-organic-lg) 0 0;
-}
-
-.hobby-placeholder {
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  color: #fff;
-  font-size: 3rem;
-  font-weight: 700;
-  border-radius: var(--radius-organic-lg) var(--radius-organic-lg) 0 0;
+  flex-shrink: 0;
 }
 
 .hobby-body {
   padding: 1rem 1.25rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Table */
@@ -2624,7 +2755,7 @@ body.dark .icon-tree-animated {
   .footer-status .footer-label {
     justify-content: flex-start;
     margin-bottom: 0.08rem;
-    font-size: 0.6rem;
+    font-size: 0.52rem;
     letter-spacing: 0.14em;
   }
   .footer-status .term-line {
@@ -2651,36 +2782,36 @@ body.dark .icon-tree-animated {
     display: inline;
   }
 
-  /* VOIGHT — smaller panel + tighter internal rhythm to keep the box short. */
-  .footer-voight {
-    flex: 0 0 auto;
-    position: static;
-    width: auto;
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    align-self: stretch;
-    padding-left: 0.5rem;
-    border-left: 1px solid var(--footer-border);
-  }
-  .footer-voight .voight-label {
-    text-align: right;
-    font-size: 0.46rem;
-    line-height: 1.15;
-  }
-  .footer-voight .voight-feed {
-    margin-top: 0.05rem;
-    gap: 0;
-  }
-  .footer-voight .voight-entry {
-    font-size: 0.44rem;
-    line-height: 1.15;
-  }
-  .footer-voight .voight-dots {
-    margin-top: 0.08rem;
-    justify-content: flex-end;
-  }
+   /* VOIGHT — smaller panel + tighter internal rhythm to keep the box short. */
+   .footer-voight {
+     flex: 0 0 auto;
+     position: static;
+     width: auto;
+     text-align: right;
+     display: flex;
+     flex-direction: column;
+     align-items: stretch;
+     align-self: center;
+     padding-left: 0.5rem;
+     border-left: 1px solid var(--footer-border);
+   }
+   .footer-voight .voight-label {
+     text-align: right;
+     font-size: 0.4rem;
+     line-height: 1.15;
+   }
+   .footer-voight .voight-feed {
+     margin-top: 0.02rem;
+     gap: 0;
+   }
+   .footer-voight .voight-entry {
+     font-size: 0.38rem;
+     line-height: 1.15;
+   }
+   .footer-voight .voight-dots {
+     margin-top: 0.04rem;
+     justify-content: flex-end;
+   }
 
   /* Copyright + text links share one inline line. */
   .footer-copy {
@@ -2977,16 +3108,16 @@ body.dark .icon-tree-animated {
 }
 
 /* Subtle dark-mode glow on the brand tree (bioluminescent foliage) */
-.dark .brand .brand-tree {
+/* .dark .brand .brand-tree {
   filter: drop-shadow(0 0 5px rgba(var(--neon-green-rgb), 0.55))
     drop-shadow(0 0 12px rgba(var(--neon-green-rgb), 0.3));
-}
+} */
 
 /* Respect reduced-motion: soften/disable the subtle tree shimmer */
 @media (prefers-reduced-motion: reduce) {
-  .brand .brand-tree {
+  /* .brand .brand-tree {
     animation: none;
-  }
+  } */
 }
 
 /* Faint blurred green atmospheric glow behind the navigation */
@@ -3016,13 +3147,6 @@ body.dark .icon-tree-animated {
   color: #e8f5e9;
   box-shadow: 0 0 10px 2px rgba(var(--accent-rgb), 0.3);
   backdrop-filter: blur(6px);
-}
-
-.dark #theme-toggle:hover {
-  box-shadow:
-    0 0 6px rgba(var(--accent-rgb), 0.5),
-    0 0 14px rgba(var(--accent-rgb), 0.3),
-    0 0 24px rgba(var(--accent-rgb), 0.2);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3582,10 +3706,49 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
     drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.16));
 }
 
+/* Hobby cards — same fern hover as universe cards (top-left corner unfurl). */
+.hobby-card.card-hover-accent::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background-image: none;
+  background-color: var(--growth-fern-color);
+  -webkit-mask-image: var(--growth-fern);
+  mask-image: var(--growth-fern);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 48px;
+  height: 62px;
+  top: -52px;
+  left: -12px;
+  transform-origin: 45.8% 100%;
+  transform: scale(1, -1) scale(0.40) rotate(45deg);
+  clip-path: none;
+  opacity: 0;
+  transition: opacity 240ms ease-in, transform 260ms ease-in;
+}
+
+.hobby-card.card-hover-accent:hover::before {
+  opacity: 1;
+  transform: scale(1, -1) scale(0.88) rotate(45deg);
+  clip-path: none;
+  transition: opacity 220ms ease-out, transform 300ms ease-out;
+}
+
+.dark .hobby-card.card-hover-accent:hover::before {
+  filter: drop-shadow(0 0 5px rgba(var(--accent-rgb), 0.3))
+    drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.16));
+}
+
 /* Reduced motion: show/fade the fern with no grow/scale motion. */
 @media (prefers-reduced-motion: reduce) {
   .universe-card.card-hover-accent::before,
-  .universe-card.card-hover-accent:hover::before {
+  .universe-card.card-hover-accent:hover::before,
+  .hobby-card.card-hover-accent::before,
+  .hobby-card.card-hover-accent:hover::before {
     transform: scale(1, -1) scale(0.88) rotate(45deg);
     clip-path: none;
   }
@@ -3798,7 +3961,7 @@ body:not(.dark) .home-hero .home-hero-greeting {
     60vh → ~67vh (×1.12). Applies to both light and dark via this breakpoint;
     desktop/tablet are untouched. */
   #hero.home-hero {
-    min-height: 67vh;
+    min-height: 75vh;
   }
   .home-scene {
     background-position: center 30%;
