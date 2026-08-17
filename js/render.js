@@ -270,10 +270,10 @@ function renderHero(personal, meta, home) {
   const highlight = (personal?.highlight || "").trim() || "Himel";
   const role =
     (personal?.role || "").trim() ||
-    "Computer Science Student · Cybersecurity · Blockchain · Cryptography";
+    "Computer Science · Cybersecurity · Blockchain · Cryptography";
   const bio =
     (personal?.bio || "").trim() ||
-    "I explore secure software, computer vision, and decentralized systems.";
+    "From research and security systems to interactive digital experiences, I like turning complex ideas into things that are useful, understandable, and well-built.";
   const pic = (personal?.profileImage || "").trim() || "images/profile.jpg";
   const picAlt = (personal?.profileAlt || "").trim() || "Md. Mahmudul Kabir Himel";
 
@@ -283,7 +283,7 @@ function renderHero(personal, meta, home) {
         <img class="profile-pic" src="${escapeHtml(pic)}" alt="${escapeHtml(picAlt)}" />
       </div>
       <div class="home-hero-text reveal">
-        <p class="home-hero-greeting">Hi, I’m</p>
+        <p class="home-hero-greeting">LET&rsquo;S OPT IN</p>
         <h1 class="home-hero-name">${escapeHtml(name)} <span class="highlight">${escapeHtml(highlight)}</span></h1>
         <p class="home-hero-role">${escapeHtml(role)}</p>
         <p class="home-hero-bio">${escapeHtml(bio)}</p>

@@ -138,12 +138,85 @@ async function initAboutPage() {
   initScrollReveal();
 }
 
+function initContactButton() {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+
+  const btn = form.querySelector(".contact-submit");
+  if (!btn) return;
+
+  btn.addEventListener("click", function (event) {
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple");
+
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = size + "px";
+    ripple.style.height = size + "px";
+    ripple.style.left = (event.clientX - rect.left - size / 2) + "px";
+    ripple.style.top = (event.clientY - rect.top - size / 2) + "px";
+
+    btn.appendChild(ripple);
+    ripple.addEventListener("animationend", () => ripple.remove());
+  });
+
+  form.addEventListener("submit", function () {
+    btn.textContent = "Got it, thanks";
+    btn.classList.add("success");
+  });
+}
+
+function initContactStatus() {
+  const statusEl = document.querySelector(".contact-status");
+  const wordEl = statusEl ? statusEl.querySelector(".contact-word") : null;
+  if (!statusEl || !wordEl) return;
+
+  const words = [
+    "awake",
+    "connected",
+    "online",
+    "listening",
+    "present",
+    "active",
+    "transmitting",
+    "unbound",
+  ];
+  let index = 0;
+  let timeout;
+
+  function typeWord(word, onDone) {
+    let i = 0;
+    const interval = setInterval(() => {
+      wordEl.textContent = word.substring(0, i + 1);
+      i++;
+      if (i >= word.length) {
+        clearInterval(interval);
+        onDone();
+      }
+    }, 100);
+  }
+
+  function cycle() {
+    typeWord(words[index], () => {
+      timeout = setTimeout(() => {
+        index = (index + 1) % words.length;
+        wordEl.textContent = "";
+        cycle();
+      }, 2500);
+    });
+  }
+
+  timeout = setTimeout(cycle, 3000);
+}
+
 async function initContactPage() {
   const site = await initApp("contact");
   if (!site) return;
 
   renderContact(site.meta);
   initScrollReveal();
+  initContactButton();
+  initContactStatus();
 }
 
 async function initPlaygroundPage() {
