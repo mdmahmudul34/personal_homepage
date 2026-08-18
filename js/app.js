@@ -17,6 +17,29 @@ function initTheme() {
     // (prevents a white frame on the next navigation / first paint).
     document.documentElement.classList.toggle("dark", isDark);
     localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    // Orbit the sun/moon icons inside the toggle (icon only — the button box
+    // itself is untouched). A transient class on <html> drives the CSS keyframes
+    // so the animation plays only on toggle, in both directions.
+    const root = document.documentElement;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+    const toDark = "theme-anim-to-dark";
+    const toLight = "theme-anim-to-light";
+    const active = isDark ? toDark : toLight;
+    const other = isDark ? toLight : toDark;
+    root.classList.remove(other);
+    // restart the animation if toggled again quickly
+    root.classList.remove(active);
+    void root.offsetWidth;
+    root.classList.add(active);
+    window.clearTimeout(window.__themeAnimT);
+    window.__themeAnimT = window.setTimeout(
+      () => root.classList.remove(active),
+      650
+    );
   });
 }
 

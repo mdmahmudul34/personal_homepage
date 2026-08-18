@@ -186,7 +186,7 @@ body.content-ready main {
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.25rem;
 }
 
 /* Actual tree illustration (tree-with-thin-branches-and-small-dots-foliage-svgrepo-com.svg)
@@ -203,6 +203,73 @@ body.content-ready main {
 /* Leaf/logo is OFF — hidden but retained in HTML */
 .brand .brand-tree {
   display: none !important;
+}
+
+/* Small decorative icon placed to the right of the brand name */
+.brand .brand-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  border-radius: 4px;
+  object-fit: contain;
+  /* cream fill in light mode */
+  color: #e3cfa3;
+  /* Super glow in light mode — luminous cream halo with a soft pulse */
+  filter: drop-shadow(0 0 4px rgba(255, 244, 214, 0.95))
+    drop-shadow(0 0 10px rgba(227, 207, 163, 0.7))
+    drop-shadow(0 0 20px rgba(227, 207, 163, 0.45));
+  animation: brand-icon-glow-light 4s ease-in-out infinite;
+}
+
+/* In light mode the ring is black; dark mode overrides it to white */
+.brand .brand-icon-ring {
+  color: #000;
+}
+
+@keyframes brand-icon-glow-light {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 3px rgba(255, 244, 214, 0.85))
+      drop-shadow(0 0 8px rgba(227, 207, 163, 0.5))
+      drop-shadow(0 0 16px rgba(227, 207, 163, 0.32));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(255, 248, 224, 1))
+      drop-shadow(0 0 16px rgba(227, 207, 163, 0.85))
+      drop-shadow(0 0 30px rgba(227, 207, 163, 0.6));
+  }
+}
+
+/* In dark mode the wings/body are black with a soft white halo + glitter
+   pulse so they read against the dark environment; the ring is white. */
+.dark .brand .brand-icon {
+  color: #000;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6))
+    drop-shadow(0 0 7px rgba(255, 255, 255, 0.3));
+  animation: brand-icon-glow 4.5s ease-in-out infinite;
+}
+
+.dark .brand .brand-icon-ring {
+  color: #fff;
+}
+
+@keyframes brand-icon-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+      drop-shadow(0 0 6px rgba(255, 255, 255, 0.22));
+  }
+  50% {
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9))
+      drop-shadow(0 0 10px rgba(255, 255, 255, 0.45));
+  }
+}
+
+/* Phone view: tighten the Himel · icon · Kabir spacing a bit more */
+@media (max-width: 600px) {
+  .brand {
+    gap: 0.12rem;
+  }
 }
 
 /* Very subtle "signal" shimmer — gentle luminosity drift on the foliage */
@@ -412,11 +479,90 @@ body.content-ready main {
   #theme-toggle::after {
     transition: none;
   }
-  /* .brand::before,
-  .brand::after {
+}
+
+/* Sun / Moon orbit animation INSIDE the toggle button (icon only).
+   The icons leave/arrive along a curved arc (orbiting the button center)
+   instead of crossfading in place. Triggered by a transient class on <html>
+   so it only plays on toggle (both directions) and never on load. The button
+   box itself is untouched and there is zero layout shift (transform only). */
+@keyframes toggle-icon-out-tr {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(9px, -7px) rotate(22deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(16px, -16px) rotate(45deg);
+    opacity: 0;
+  }
+}
+@keyframes toggle-icon-in-bl {
+  0% {
+    transform: translate(-16px, 16px) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-9px, 7px) rotate(-22deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+}
+@keyframes toggle-icon-out-bl {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-9px, 7px) rotate(-22deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-16px, 16px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+@keyframes toggle-icon-in-tr {
+  0% {
+    transform: translate(16px, -16px) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(9px, -7px) rotate(22deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+html.theme-anim-to-dark #theme-toggle::before {
+  animation: toggle-icon-out-tr 550ms ease-in-out forwards;
+}
+html.theme-anim-to-dark #theme-toggle::after {
+  animation: toggle-icon-in-bl 550ms ease-in-out forwards;
+}
+html.theme-anim-to-light #theme-toggle::before {
+  animation: toggle-icon-in-tr 550ms ease-in-out forwards;
+}
+html.theme-anim-to-light #theme-toggle::after {
+  animation: toggle-icon-out-bl 550ms ease-in-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-anim-to-dark #theme-toggle::before,
+  html.theme-anim-to-dark #theme-toggle::after,
+  html.theme-anim-to-light #theme-toggle::before,
+  html.theme-anim-to-light #theme-toggle::after {
     animation: none;
-    opacity: 0.4;
-  } */
+  }
 }
 
 #nav-toggle {
@@ -1777,12 +1923,12 @@ tbody tr:hover {
   padding: 0.65rem 1.25rem;
   border-radius: 8px;
   font-size: 0.925rem;
+  font-family: 'Manrope', sans-serif;
   font-weight: 600;
   letter-spacing: 0.02em;
   cursor: pointer;
   border: none;
   transition: transform 0.2s, box-shadow var(--transition), background var(--transition);
-  font-family: inherit;
 }
 
 .btn-primary {
@@ -4129,7 +4275,7 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
 
 /* ══════════════════════════════════════════════════════════════════════════
    HOME — FULL-SCREEN SVG ENVIRONMENT
-   18681629_g967_ucaj_210816.svg IS the Home environment. The entire main area
+    4918080_30295.svg IS the Home environment. The entire main area
    between the persistent header and the footer becomes ONE continuous scene.
    The hero identity (profile, name, role, bio, CTA) lives as HTML layered
    ABOVE the SVG, so it stays responsive, accessible and selectable. It reuses
@@ -4138,64 +4284,58 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* Override the shared main layout for Home: full width, no padding, and
-   relative so the absolutely-positioned SVG fills the entire area. */
+   relative so the scene fills the entire area. */
 #home-env.home-env {
   position: relative;
   max-width: none;
   width: 100%;
+  min-height: 100vh;
   padding: 0;
   margin: 0;
+  background-color: #597068;
 }
 
-/* The SVG environment layer — fills everything between header and footer.
-   Rendered directly from the asset (artwork preserved); cover-crop only when
-   needed for aspect ratio, never distorted. Muted fallback base while it loads
-   so there is no flash / blank. */
+.dark #home-env.home-env {
+  background-color: #2a3a32;
+}
+
+/* The SVG environment layer — full scene, nothing cropped. The container
+   expands to show the entire square artwork; sides are filled by width 100%,
+   and the homepage grows vertically to fit the full height. */
 .home-scene {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 0;
-  background-image: url("../assets/18681629_g967_ucaj_210816.svg");
-  background-size: cover;
-  background-position: center;
+  background-image: url("assets/growth/4918080_30295.svg");
+  background-size: 100% auto;
+  background-position: top center;
   background-repeat: no-repeat;
-  background-color: #8fae93;
+  background-color: #597068;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
 .dark .home-scene {
-  background-color: #1b2a1e;
+  background-color: #2a3a32;
 }
 
-/* PC homepage only — reproduce the SVG's ORIGINAL full-screen fit.
-   The artwork has a native aspect of viewBox 335.171x186.206 (~1.8:1, i.e.
-   ~16:9), so on a full-width desktop hero it is meant to fill the whole screen.
-   Matching the scene container to the SVG's OWN aspect ratio lets the existing
-   `background-size: cover` tile the artwork edge-to-edge at its true
-   proportions — full width, full height reachable at all four edges, no
-   vertical crop, no distortion, no "smaller image" margins. Mobile and tablet
-   keep their existing treatment above. */
+/* PC homepage — the source artwork is square (viewBox 400x400).
+   Use `background-size: 100% auto` so the full SVG is visible without
+   cropping, aligned to the top. The container stays full-width and the
+   homepage grows vertically to fit the full height. */
 @media (min-width: 1025px) {
-  #home-env.home-env {
-    aspect-ratio: 335.171 / 186.206;
-  }
   .home-scene {
-    background-size: cover;
+    background-size: 100% auto;
   }
 }
 
 /* Subtle atmospheric wash for legibility — same treatment as the inner-page
-   scenes: pale daylight mist (light mode), deeper night veil (dark mode). */
+   scenes: deeper night veil (dark mode only). Light mode keeps the artwork
+   clean and continuous without a white fade band. */
 .home-scene::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(255, 255, 255, 0.08) 30%,
-    rgba(255, 255, 255, 0) 55%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: transparent;
   z-index: 1;
   pointer-events: none;
 }
@@ -4212,13 +4352,33 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
 
 /* HTML content overlay sits above the scene. */
 .home-overlay {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
   width: 100%;
-  min-height: 100%;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
+}
+
+/* PC view only — move hero content to top-left corner. */
+@media (min-width: 1025px) {
+  .home-overlay {
+    padding-top: calc(10vh + 67px);
+    padding-left: 256px;
+    justify-content: start;
+    transform: translateX(-128px);
+  }
+}
+
+/* Dark mode — frosted content base behind hero text for readability. */
+@media (min-width: 1025px) {
+  .dark .home-hero-inner {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
 
 /* Hero content: identity naturally inside the environment (not a card). */
@@ -4238,9 +4398,11 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
 }
 
 /* Profile — small, natural, integrated with the environment (not a loud
-   floating avatar). */
+   floating avatar). Never blurred or dimmed by the frosted backdrop. */
 .home-hero-profile {
   position: relative;
+  z-index: 2;
+  filter: none;
 }
 
 .home-hero .profile-pic {
@@ -4251,68 +4413,96 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
   border: 2px solid rgba(var(--accent-rgb), 0.55);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18), 0 0 0 6px rgba(var(--accent-rgb), 0.06);
   transform: none; /* center-aligned profile, no offset */
+  filter: none;
 }
 
 .home-hero .profile-pic:hover {
   transform: scale(1.04);
 }
 
-/* Hero typography (white for dark scenes; overridden for light below). */
+/* Hero typography — editorial + atmospheric feel. */
 .home-hero .home-hero-greeting {
   margin: 0 0 0.25rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.16em;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent-light);
+  color: #4ADE80;
 }
 
 .home-hero .home-hero-name {
   margin: 0 0 0.55rem;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.12;
-  font-weight: 800;
-  color: #fff;
+  font-family: 'Instrument Serif', serif;
+  font-weight: 500;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #E8F0E9;
 }
 
 .home-hero .home-hero-name .highlight {
   color: #a5d6a7;
 }
 
+/* PC view only — tiny breathing room between "Kabir" and "Himel". */
+@media (min-width: 1025px) {
+  .home-hero .home-hero-name .highlight {
+    margin-left: 0.06em;
+  }
+}
+
 .home-hero .home-hero-role {
   margin: 0 0 0.5rem;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.94);
+  font-family: 'Agu Display', 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-variation-settings: "MORF" 20;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: #F3E9A8;
+  opacity: 0.95;
+  text-shadow: 0 0 18px rgba(165, 214, 167, 0.25), 0 0 40px rgba(165, 214, 167, 0.12);
+  transform: translateY(-4px);
 }
 
 .home-hero .home-hero-bio {
   margin: 0 0 1.5rem;
-  max-width: 46ch;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Science Gothic', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 34ch;
+  color: #FFFDA6;
+  opacity: 0.85;
 }
 
-/* Light mode: pure white title with radiant glow; deep forest text for the
-   supporting role/bio (same grading principle as the inner-page scenes). */
+/* Light mode — adjust colors for readability on lighter background. */
 body:not(.dark) .home-hero .home-hero-name {
-  color: #fff;
+  color: #112217;
 }
-body:not(.dark) .home-hero .home-hero-role,
+
+body:not(.dark) .home-hero .home-hero-name .highlight {
+  color: #FFFDA6;
+  text-shadow:
+    0 0 4px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 0, 0, 0.6),
+    0 0 16px rgba(255, 253, 166, 0.8),
+    0 0 32px rgba(255, 253, 166, 0.5),
+    0 0 64px rgba(255, 253, 166, 0.3);
+}
+
+body:not(.dark) .home-hero .home-hero-role {
+  color: #F3E9A8;
+  text-shadow: 0 0 18px rgba(255, 253, 166, 0.3), 0 0 40px rgba(255, 253, 166, 0.15);
+}
+
 body:not(.dark) .home-hero .home-hero-bio {
-  color: #1f3a2c;
-}
-body:not(.dark) .home-hero .home-hero-name .highlight,
-body:not(.dark) .home-hero .home-hero-greeting {
-  color: #2e7d32;
+  color: #FFFDA6;
+  opacity: 0.85;
 }
 
-/* Light mode — intentional text elevation on all page titles & subtitles.
-   Titles carry a super white glow; subtitles get a stronger lift for
-   readability. Both stay elegant and restrained. Dark mode gets a
-   lighter touch (see below). */
-body:not(.dark) .page-header h1,
-body:not(.dark) .home-hero .home-hero-name {
+/* Restore light mode page-header white glow for non-home pages. */
+body:not(.dark) .page-header h1 {
   color: #fff;
   text-shadow:
     0 0 2px rgba(0, 0, 0, 0.25),
@@ -4324,49 +4514,23 @@ body:not(.dark) .home-hero .home-hero-name {
     0 0 40px rgba(255, 255, 255, 0.14);
 }
 
-/* Light mode — the whole hub/hero title is wrapped in .highlight (green by
-   default), so the h1 white color above is overridden on the span. Force the
-   highlighted title text white in light mode only. */
 body:not(.dark) .page-header .highlight,
 body:not(.dark) .forest-section .page-header h1 .highlight,
 body:not(.dark) .forest-section .forest-content-wrapper > h1 .highlight,
 body:not(.dark) .forest-section-writing .page-header h1 .highlight,
-body:not(.dark) .forest-section-writing .forest-content-wrapper > h1 .highlight,
-body:not(.dark) .home-hero .home-hero-name .highlight {
+body:not(.dark) .forest-section-writing .forest-content-wrapper > h1 .highlight {
   color: #fff;
 }
 
-body:not(.dark) .page-header > p:not(.page-intro),
-body:not(.dark) .home-hero .home-hero-role,
-body:not(.dark) .home-hero .home-hero-bio {
+body:not(.dark) .page-header > p:not(.page-intro) {
   text-shadow:
     0 1px 1px rgba(0, 0, 0, 0.03),
     0 0 4px rgba(76, 175, 80, 0.08);
 }
 
-/* Home hero — simple readable white in light mode, no glow */
-body:not(.dark) .home-hero .home-hero-name,
-body:not(.dark) .home-hero .home-hero-greeting {
-  color: #fff;
-  text-shadow: none;
-}
-
-body:not(.dark) .home-hero .home-hero-role,
-body:not(.dark) .home-hero .home-hero-bio {
-  color: var(--text);
-  text-shadow:
-    0 0 2px rgba(255, 255, 255, 0.9),
-    0 0 6px rgba(255, 255, 255, 0.6),
-    0 0 12px rgba(255, 255, 255, 0.35),
-    0 0 22px rgba(255, 255, 255, 0.15);
-}
-
-/* Dark mode — pure white page titles with a reduced elegant glow.
-   Light mode carries the stronger white glow; here the halo is
-   softer to preserve the atmospheric dark scene. */
-.dark .page-header h1,
+/* Dark mode — subtle warm green glow on the name. */
 .dark .home-hero .home-hero-name {
-  color: #fff;
+  text-shadow: 0 0 40px rgba(180, 220, 180, 0.15);
 }
 
 /* Hero CTA — reuse the site's established button language as-is (no new
@@ -4377,8 +4541,63 @@ body:not(.dark) .home-hero .home-hero-bio {
   gap: 0.75rem;
 }
 
-/* Responsive — stack identity vertically on narrow screens; keep the scene
-   cropping centered on the important artwork detail. */
+/* Homepage hero buttons use Cormorant Garamond (SemiBold / 600). */
+.home-hero-actions .btn {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Homepage hero button overrides — match header green, soft synergy. */
+.home-hero .btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+
+.home-hero .btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid var(--accent);
+  text-decoration: none;
+}
+
+.home-hero .btn-primary:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.home-hero .btn-outline:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Light mode button adjustments — keep synergy with header. */
+body:not(.dark) .home-hero .btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+body:not(.dark) .home-hero .btn-outline {
+  color: #fff;
+  border: 2px solid var(--accent);
+}
+
+body:not(.dark) .home-hero .btn-primary:hover {
+  background: var(--accent-light);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+body:not(.dark) .home-hero .btn-outline:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Responsive — stack identity vertically on narrow screens. */
 @media (max-width: 680px) {
   .home-hero-inner {
     grid-template-columns: 1fr;
@@ -4392,16 +4611,27 @@ body:not(.dark) .home-hero .home-hero-bio {
   .home-hero-actions {
     justify-content: center;
   }
-  /* Mobile/phone only: give the SVG-scene "body" ~12% more vertical height.
-     The `.home-scene` fills `#home-env` (absolute inset:0), so raising the
-     section's min-height grows the scene container. Base `.hero` min-height is
-    60vh → ~67vh (×1.12). Applies to both light and dark via this breakpoint;
-    desktop/tablet are untouched. */
   #hero.home-hero {
     min-height: 75vh;
   }
+
+  /* Phone view: fill viewport completely with the SVG scene.
+     Use cover so there is no blank space; top is preserved to keep the
+     important upper scene content visible. */
+  #home-env.home-env {
+    min-height: 100vh;
+  }
   .home-scene {
-    background-position: center 30%;
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: top center;
+    aspect-ratio: auto;
+  }
+  .home-overlay {
+    position: absolute;
+    inset: 0;
+    align-items: center;
   }
 }
 
