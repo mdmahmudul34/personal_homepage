@@ -1844,19 +1844,6 @@ body[data-page="contact"] main {
   position: relative;
 }
 
-/* Soft forest atmosphere behind the contact content (far lighter than the
-   full-bleed forest scenes used elsewhere — just a gentle green breath). */
-body[data-page="contact"] main::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(70% 55% at 50% -5%, rgba(var(--accent-rgb), 0.1) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(var(--accent-rgb), 0.05) 0%, transparent 38%);
-}
-
 body[data-page="contact"] .page-header,
 body[data-page="contact"] .contact-form {
   position: relative;
@@ -1876,7 +1863,7 @@ body[data-page="contact"] .contact-form {
   box-shadow:
     var(--shadow),
     0 0 0 1px rgba(var(--accent-rgb), 0.06),
-    0 0 36px rgba(var(--accent-rgb), 0.1);
+    0 0 2px rgba(var(--accent-rgb), 0.06);
   position: relative;
   overflow: visible;
 }
@@ -1887,7 +1874,7 @@ body[data-page="contact"] .contact-form {
   box-shadow:
     var(--shadow),
     0 0 0 1px rgba(92, 184, 136, 0.08),
-    0 0 40px rgba(var(--accent-rgb), 0.16);
+    0 0 2px rgba(var(--accent-rgb), 0.08);
 }
 
 .contact-form label {
@@ -2033,16 +2020,16 @@ select {
 .contact-submit.success {
   background: var(--accent);
   box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.25);
-  cursor: default;
-  pointer-events: none;
 }
 
-.contact-submit.success::after {
-  content: "✓";
-  margin-left: 0.6rem;
-  display: inline-block;
-  opacity: 0;
-  animation: check-fade 0.4s 0.1s ease forwards;
+.contact-submit.error {
+  background: #c97d4b;
+  box-shadow: 0 4px 12px rgba(201, 125, 75, 0.18);
+}
+
+.dark .contact-submit.error {
+  background: #d4845a;
+  box-shadow: 0 4px 12px rgba(212, 132, 90, 0.16);
 }
 
 @keyframes check-fade {
@@ -2060,9 +2047,8 @@ select {
   text-align: center;
 }
 
-.contact-note::before {
-  content: "> ";
-  color: var(--accent);
+.contact-prompt {
+  color: var(--text-muted);
   font-weight: 700;
 }
 
@@ -2071,8 +2057,34 @@ select {
   font-weight: 600;
 }
 
+.playground-terminal {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.playground-prompt {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.playground-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
 body:not(.dark) .contact-sign-name {
   color: #ab7d4a;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.35) 0%,
+    #ab7d4a 45%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .contact-status {
@@ -2086,7 +2098,7 @@ body:not(.dark) .contact-sign-name {
 
 .contact-word {
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .contact-cursor {
@@ -2154,22 +2166,6 @@ body:not(.dark) .contact-sign-name {
   transform: scaleX(0);
   transform-origin: center;
   transition: transform var(--transition);
-}
-
-/* Contact page — light mode only: title/subtitle in green/dark tones
-   instead of the site-wide white glow treatment. */
-body[data-page="contact"]:not(.dark) .page-header h1 {
-  color: var(--accent);
-  text-shadow: none;
-}
-
-body[data-page="contact"]:not(.dark) .page-header .highlight {
-  color: var(--accent);
-}
-
-body[data-page="contact"]:not(.dark) .page-header > p {
-  color: var(--text);
-  text-shadow: none;
 }
 
 /* Playground page — light mode only: title/subtitle in green/dark tones
@@ -3851,6 +3847,13 @@ body:not(.dark) .footer-tagline .footer-tagline-sm {
   }
 }
 
+.forest-section-contact {
+  background-image: url("assets/growth/27282927_1qhm_ptqo_211202.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    Experience Forest Section - Full-bleed background with SVG scene
    Uses: 25593237_dmxm_viil_211202.svg (exact local artwork - kept untouched)
@@ -3983,7 +3986,8 @@ body:not(.dark) .footer-tagline .footer-tagline-sm {
    background (light: #f4f7f5, dark: #0d1110 via --bg) instead of ending on
    a hard horizontal line. Works for both modes. */
 .forest-section::after,
-.forest-section-writing::after {
+.forest-section-writing::after,
+.forest-section-contact::after {
   content: "";
   position: absolute;
   left: 0;

@@ -736,10 +736,6 @@ function renderAboutPage(site, hobbies) {
 }
 
 function renderContact(meta) {
-  const form = document.getElementById("contact-form");
-  if (form) {
-    form.action = `mailto:${meta.email}`;
-  }
 }
 
 function initScrollReveal() {

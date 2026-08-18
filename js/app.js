@@ -160,9 +160,48 @@ function initContactButton() {
     ripple.addEventListener("animationend", () => ripple.remove());
   });
 
-  form.addEventListener("submit", function () {
-    btn.textContent = "Got it, thanks";
-    btn.classList.add("success");
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    btn.textContent = "Send it over";
+    btn.disabled = true;
+    btn.classList.remove("error", "success");
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success !== false) {
+        btn.textContent = "Got it, thanks ✓";
+        btn.classList.add("success");
+        btn.classList.remove("error");
+        btn.disabled = false;
+        form.reset();
+      } else {
+        btn.textContent = "Transmission failed ✕";
+        btn.disabled = false;
+        btn.classList.add("error");
+        btn.classList.remove("success");
+      }
+    } catch (error) {
+      btn.textContent = "Transmission failed ✕";
+      btn.disabled = false;
+      btn.classList.add("error");
+      btn.classList.remove("success");
+    }
+  });
+
+  form.querySelectorAll("input, textarea").forEach(function (field) {
+    field.addEventListener("input", function () {
+      btn.textContent = "Send it over";
+      btn.classList.remove("error", "success");
+    });
   });
 }
 
