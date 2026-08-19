@@ -488,72 +488,104 @@ body.content-ready main {
    box itself is untouched and there is zero layout shift (transform only). */
 @keyframes toggle-icon-out-tr {
   0% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(4px, -7px) rotate(6deg) scale(1.02);
     opacity: 1;
   }
   50% {
-    transform: translate(9px, -7px) rotate(22deg);
-    opacity: 1;
+    transform: translate(8px, -12px) rotate(13deg) scale(1.04);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(12px, -14px) rotate(18deg) scale(1.02);
+    opacity: 0.25;
   }
   100% {
-    transform: translate(16px, -16px) rotate(45deg);
+    transform: translate(16px, -16px) rotate(22deg) scale(1);
     opacity: 0;
   }
 }
 @keyframes toggle-icon-in-bl {
   0% {
-    transform: translate(-16px, 16px) rotate(-45deg);
+    transform: translate(-16px, 16px) rotate(-22deg) scale(1);
     opacity: 0;
   }
+  25% {
+    transform: translate(-12px, 14px) rotate(-18deg) scale(1.02);
+    opacity: 0.25;
+  }
   50% {
-    transform: translate(-9px, 7px) rotate(-22deg);
+    transform: translate(-8px, 12px) rotate(-13deg) scale(1.04);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(-4px, 7px) rotate(-6deg) scale(1.02);
     opacity: 1;
   }
   100% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
 }
 @keyframes toggle-icon-out-bl {
   0% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(-4px, 7px) rotate(-6deg) scale(1.02);
     opacity: 1;
   }
   50% {
-    transform: translate(-9px, 7px) rotate(-22deg);
-    opacity: 1;
+    transform: translate(-8px, 12px) rotate(-13deg) scale(1.04);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(-12px, 14px) rotate(-18deg) scale(1.02);
+    opacity: 0.25;
   }
   100% {
-    transform: translate(-16px, 16px) rotate(-45deg);
+    transform: translate(-16px, 16px) rotate(-22deg) scale(1);
     opacity: 0;
   }
 }
 @keyframes toggle-icon-in-tr {
   0% {
-    transform: translate(16px, -16px) rotate(45deg);
+    transform: translate(16px, -16px) rotate(22deg) scale(1);
     opacity: 0;
   }
+  25% {
+    transform: translate(12px, -14px) rotate(18deg) scale(1.02);
+    opacity: 0.25;
+  }
   50% {
-    transform: translate(9px, -7px) rotate(22deg);
+    transform: translate(8px, -12px) rotate(13deg) scale(1.04);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(4px, -7px) rotate(6deg) scale(1.02);
     opacity: 1;
   }
   100% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
 }
 
 html.theme-anim-to-dark #theme-toggle::before {
-  animation: toggle-icon-out-tr 550ms ease-in-out forwards;
+  animation: toggle-icon-out-tr 450ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 html.theme-anim-to-dark #theme-toggle::after {
-  animation: toggle-icon-in-bl 550ms ease-in-out forwards;
+  animation: toggle-icon-in-bl 450ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 html.theme-anim-to-light #theme-toggle::before {
-  animation: toggle-icon-in-tr 550ms ease-in-out forwards;
+  animation: toggle-icon-in-tr 450ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 html.theme-anim-to-light #theme-toggle::after {
-  animation: toggle-icon-out-bl 550ms ease-in-out forwards;
+  animation: toggle-icon-out-bl 450ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4461,7 +4493,7 @@ body:not(.dark) .forest-section-writing .forest-content-wrapper > p {
   letter-spacing: 0.02em;
   color: #F3E9A8;
   opacity: 0.95;
-  text-shadow: 0 0 18px rgba(165, 214, 167, 0.25), 0 0 40px rgba(165, 214, 167, 0.12);
+  text-shadow: 0 0 8px rgba(165, 214, 167, 0.55), 0 0 18px rgba(165, 214, 167, 0.3), 0 0 36px rgba(165, 214, 167, 0.15);
   transform: translateY(-4px);
 }
 
@@ -4493,7 +4525,22 @@ body:not(.dark) .home-hero .home-hero-name .highlight {
 
 body:not(.dark) .home-hero .home-hero-role {
   color: #F3E9A8;
-  text-shadow: 0 0 18px rgba(255, 253, 166, 0.3), 0 0 40px rgba(255, 253, 166, 0.15);
+  text-shadow: 0 0 8px rgba(255, 253, 166, 0.7), 0 0 18px rgba(255, 253, 166, 0.45), 0 0 36px rgba(255, 253, 166, 0.25), 0 0 72px rgba(255, 253, 166, 0.12);
+  position: relative;
+}
+
+body:not(.dark) .home-hero .home-hero-role::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  transform: scaleY(-1);
+  transform-origin: top;
+  opacity: 0.12;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 70%);
 }
 
 body:not(.dark) .home-hero .home-hero-bio {
@@ -4528,9 +4575,23 @@ body:not(.dark) .page-header > p:not(.page-intro) {
     0 0 4px rgba(76, 175, 80, 0.08);
 }
 
-/* Dark mode — subtle warm green glow on the name. */
+/* Dark mode — subtle white glow on the name. */
 .dark .home-hero .home-hero-name {
-  text-shadow: 0 0 40px rgba(180, 220, 180, 0.15);
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.12);
+}
+
+/* Dark mode — subtle cool tint on "d. M" and "dul Ka" in the name. */
+.dark .home-hero .home-hero-name .cool-tint {
+  background: linear-gradient(to right, #E8F0E9, #D2DFF5 22%, #D2DFF5 78%, #E8F0E9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #D2DFF5;
+}
+
+/* Dark mode — subtle pastel glow on the role text. */
+.dark .home-hero .home-hero-role {
+  text-shadow: 0 0 8px rgba(230, 230, 250, 0.4), 0 0 18px rgba(230, 230, 250, 0.2), 0 0 36px rgba(230, 230, 250, 0.1);
 }
 
 /* Hero CTA — reuse the site's established button language as-is (no new

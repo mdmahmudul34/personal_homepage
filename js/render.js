@@ -82,7 +82,7 @@ function renderNav(navItems, currentPage) {
   if (!nav) return;
 
   nav.innerHTML = navItems
-    .filter((item) => !item.deferred)
+    .filter((item) => !item.deferred && item.nav !== false)
     .map(
       (item) =>
         `<a href="${item.href}" class="${isNavActive(item.page, currentPage) ? "active" : ""}">${escapeHtml(item.label)}</a>`
@@ -267,6 +267,9 @@ function renderHero(personal, meta, home) {
   // Fallbacks keep the environment identity intact even if the data file is
   // reset to placeholders.
   const name = (personal?.name || "").trim() || "Md. Mahmudul Kabir";
+  const nameHtml = escapeHtml(name)
+    .replace("d. M", '<span class="cool-tint">d. M</span>')
+    .replace("dul Ka", '<span class="cool-tint">dul Ka</span>');
   const highlight = (personal?.highlight || "").trim() || "Himel";
   const role =
     (personal?.role || "").trim() ||
@@ -284,8 +287,8 @@ function renderHero(personal, meta, home) {
       </div>
       <div class="home-hero-text reveal">
         <p class="home-hero-greeting">LET&rsquo;S OPT IN</p>
-        <h1 class="home-hero-name">${escapeHtml(name)} <span class="highlight">${escapeHtml(highlight)}</span></h1>
-        <p class="home-hero-role">${escapeHtml(role)}</p>
+        <h1 class="home-hero-name">${nameHtml} <span class="highlight">${escapeHtml(highlight)}</span></h1>
+        <p class="home-hero-role" data-text="${escapeHtml(role)}">${escapeHtml(role)}</p>
         <p class="home-hero-bio">${escapeHtml(bio)}</p>
         <div class="home-hero-actions">
           <a href="work.html" class="btn btn-primary">Explore Work</a>

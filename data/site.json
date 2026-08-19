@@ -88,6 +88,7 @@
     { "label": "Experience", "href": "experience.html", "page": "experience" },
     { "label": "About", "href": "about.html", "page": "about" },
     { "label": "Playground", "href": "playground.html", "page": "playground" },
+    { "label": "Dream Shell", "href": "dream-shell.html", "page": "dream-shell", "nav": false },
     { "label": "Contact", "href": "contact.html", "page": "contact" },
     { "label": "Elven Dome", "href": "elven-dome.html", "page": "elven-dome", "deferred": true }
   ],

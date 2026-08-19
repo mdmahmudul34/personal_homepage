@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dream Shell | Himel Kabir</title>
+    <link rel="icon" href="css/assets/growth/44655355_9036259.svg" type="image/svg+xml" />
+    <meta name="description" content="A personal digital environment by Himel Kabir" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/dream-shell.css" />
+    <script defer src="js/dream-shell.js"></script>
+  </head>
+  <body data-page="dream-shell">
+    <div class="ds-container">
+      <div class="ds-glow"></div>
+      <div class="ds-screen">
+        <div class="ds-initial" id="ds-initial">
+          <h1 class="ds-title">DREAM SHELL</h1>
+          <p class="ds-subtitle">personal environment // 01</p>
+
+          <div class="ds-status">
+            <div class="ds-status-row">
+              <span class="ds-label">system</span>
+              <span class="ds-value ds-online">ONLINE</span>
+            </div>
+            <div class="ds-status-row">
+              <span class="ds-label">focus</span>
+              <span class="ds-value">BUILDING</span>
+            </div>
+            <div class="ds-status-row">
+              <span class="ds-label">mood</span>
+              <span class="ds-value">AFTER HOURS</span>
+            </div>
+          </div>
+
+          <div class="ds-clock" id="ds-clock" aria-live="polite"></div>
+
+          <div class="ds-terminal-preview" id="ds-terminal-preview" role="button" tabindex="0" aria-label="Open terminal">
+            <div class="ds-preview-header">
+              <span class="ds-preview-dot"></span>
+              <span class="ds-preview-title">guest@dream-shell:~</span>
+            </div>
+            <div class="ds-preview-body">
+              <div class="ds-preview-line"><span class="ds-prompt">$</span> help</div>
+              <div class="ds-preview-line preview-muted">available commands...</div>
+              <div class="ds-preview-line"><span class="ds-prompt">$</span> <span class="ds-cursor" aria-hidden="true"></span></div>
+            </div>
+          </div>
+
+          <p class="ds-hint">press any key to enter · type <span class="ds-prompt">help</span> to explore</p>
+
+          <div class="ds-modules">
+            <div class="ds-module" data-action="status" tabindex="0" role="button">
+              <div class="ds-module-header">CONTROL ROOM</div>
+              <div class="ds-module-body">
+                <div class="ds-module-row"><span class="ds-label">SYSTEM</span><span class="ds-value ds-online">ONLINE</span></div>
+                <div class="ds-module-row"><span class="ds-label">RESEARCH</span><span class="ds-value ds-info">ACTIVE</span></div>
+                <div class="ds-module-row"><span class="ds-label">BUILD</span><span class="ds-value ds-info">ACTIVE</span></div>
+                <div class="ds-module-row ds-module-focus-row">
+                  <span class="ds-label">FOCUS</span>
+                  <span class="ds-value" id="ds-module-focus">PORTFOLIO</span>
+                </div>
+              </div>
+              <div class="ds-module-footer"><span class="ds-module-btn">OPEN</span></div>
+            </div>
+
+            <div class="ds-module" data-action="focus" tabindex="0" role="button">
+              <div class="ds-module-header">AFTER HOURS</div>
+              <div class="ds-module-body">
+                <div class="ds-module-row"><span class="ds-label">SESSION</span><span class="ds-value" id="ds-module-timer">25:00</span></div>
+                <div class="ds-module-row"><span class="ds-label">STATUS</span><span class="ds-value" id="ds-module-focus-status">READY</span></div>
+              </div>
+              <div class="ds-module-footer"><span class="ds-module-btn">START</span></div>
+            </div>
+
+            <div class="ds-module" data-action="tools" tabindex="0" role="button">
+              <div class="ds-module-header">TOOLS</div>
+              <div class="ds-module-body">
+                <div class="ds-module-tools">
+                  <span>SHA-256</span>
+                  <span>BASE64</span>
+                  <span>JSON</span>
+                  <span>CIDR</span>
+                  <span>TIMESTAMP</span>
+                </div>
+                <div class="ds-module-row" style="margin-top: 0.6rem;">
+                  <span class="ds-label">UTILITIES</span><span class="ds-value">07</span>
+                </div>
+              </div>
+              <div class="ds-module-footer"><span class="ds-module-btn">OPEN TOOLS</span></div>
+            </div>
+
+            <div class="ds-module ds-module-void" data-action="void" tabindex="0" role="button">
+              <div class="ds-module-header">THE VOID</div>
+              <div class="ds-module-body">
+                <div class="ds-module-row"><span class="ds-label">FRAGMENTS</span><span class="ds-value" id="ds-module-void-count">03</span></div>
+                <div class="ds-void-preview" id="ds-void-preview"></div>
+              </div>
+              <div class="ds-module-footer"><span class="ds-module-btn">ENTER</span></div>
+            </div>
+          </div>
+
+          <div class="ds-exit">
+            <a href="index.html" class="ds-exit-link">← return to portfolio</a>
+          </div>
+        </div>
+
+        <div class="ds-terminal" id="ds-terminal" role="region" aria-label="Terminal">
+          <div class="ds-output" id="ds-output" aria-live="polite" aria-atomic="false"></div>
+          <div class="ds-input-line">
+            <span class="ds-prompt">guest@dream-shell:~$</span>
+            <input
+              type="text"
+              class="ds-input"
+              id="ds-input"
+              autocomplete="off"
+              spellcheck="false"
+              autofocus
+              aria-label="Command input"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

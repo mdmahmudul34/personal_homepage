@@ -38,7 +38,7 @@ function initTheme() {
     window.clearTimeout(window.__themeAnimT);
     window.__themeAnimT = window.setTimeout(
       () => root.classList.remove(active),
-      650
+      550
     );
   });
 }

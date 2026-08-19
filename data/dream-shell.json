@@ -1,0 +1,117 @@
+{
+  "about": {
+    "name": "Md. Mahmudul Kabir",
+    "handle": "Himel",
+    "role": "Computer Science · Cybersecurity · Blockchain · Cryptography",
+    "bio": "I build things at the intersection of security, systems, and interactive software. Interested in practical cryptography, secure architectures, and tools that make complex ideas usable."
+  },
+  "projects": [
+    {
+      "name": "CineFlix Ticket Booking",
+      "tags": ["HTML", "CSS", "JavaScript", "SQL"],
+      "url": "https://github.com/veja39/cineflix.git",
+      "linkLabel": "Source Code"
+    },
+    {
+      "name": "academiQ Peer Education",
+      "tags": ["Collaboration", "Education", "Web"],
+      "url": "https://github.com/islam-ahsanul/academiq.git",
+      "linkLabel": "Source Code"
+    }
+  ],
+  "research": [
+    {
+      "title": "Research placeholder",
+      "url": "work-research.html"
+    }
+  ],
+  "writing": [
+    {
+      "title": "Literary",
+      "url": "writing-literary.html"
+    },
+    {
+      "title": "Essays",
+      "url": "writing-essays.html"
+    },
+    {
+      "title": "Technical Writing",
+      "url": "writing-technical.html"
+    }
+  ],
+  "status": {
+    "system": "ONLINE",
+    "portfolio": "ONLINE",
+    "research": "ACTIVE",
+    "build": "ACTIVE"
+  },
+  "focus": {
+    "current": "portfolio",
+    "areas": ["portfolio", "research", "cloud / devops"]
+  },
+  "latestActivity": [
+    { "label": "latest project", "value": "CineFlix Ticket Booking" },
+    { "label": "latest paper", "value": "Research placeholder" },
+    { "label": "latest update", "value": "Dream Shell v0.1.0" }
+  ],
+  "contact": {
+    "url": "contact.html",
+    "label": "Open Contact page"
+  },
+  "notes": [
+    {
+      "id": "docker-notes",
+      "title": "Docker Notes",
+      "category": "notes",
+      "date": "2026-08-15",
+      "tags": ["docker", "containers", "devops"],
+      "content": "Container isolation, image layering, multi-stage builds, and minimal attack surfaces.",
+      "relatedLinks": []
+    },
+    {
+      "id": "container-security",
+      "title": "Container Security",
+      "category": "notes",
+      "date": "2026-08-12",
+      "tags": ["docker", "security", "containers"],
+      "content": "Read-only filesystems, non-root users, capability dropping, and secret management.",
+      "relatedLinks": []
+    },
+    {
+      "id": "devops-project",
+      "title": "DevOps Project",
+      "category": "projects",
+      "date": "2026-08-01",
+      "tags": ["devops", "docker", "ci/cd"],
+      "content": "CI/CD pipeline with containerized deployments and automated testing.",
+      "relatedLinks": []
+    },
+    {
+      "id": "things-learned",
+      "title": "Things I Learned",
+      "category": "notes",
+      "date": "2026-07-28",
+      "tags": ["learning", "docker", "kubernetes"],
+      "content": "Orchestration basics, service mesh concepts, and infrastructure as code.",
+      "relatedLinks": []
+    },
+    {
+      "id": "crypto-notes",
+      "title": "Cryptography Notes",
+      "category": "notes",
+      "date": "2026-08-10",
+      "tags": ["cryptography", "security", "math"],
+      "content": "Symmetric and asymmetric primitives, hash functions, and practical protocol design.",
+      "relatedLinks": []
+    },
+    {
+      "id": "blockchain-notes",
+      "title": "Blockchain Notes",
+      "category": "notes",
+      "date": "2026-08-08",
+      "tags": ["blockchain", "cryptography", "distributed"],
+      "content": "Consensus mechanisms, merkle trees, and smart contract security considerations.",
+      "relatedLinks": []
+    }
+  ]
+}
