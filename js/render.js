@@ -118,10 +118,8 @@ function renderFooter(site, currentPage = "") {
   const navItems = (site?.navigation || []).filter((item) => !item.deferred);
 
   const name = personal.name?.trim() || "Himel Kabir";
-  const tagline =
-    personal.role?.trim() ||
-    meta.tagline?.trim() ||
-    "CS Student · Cybersecurity · Blockchain · Cryptography";
+  const footerName = personal.highlight?.trim() ? `${name} ${personal.highlight}` : name;
+  const tagline = "CS Student & Researcher · CPS · ICS Security · ML";
   const path = window.location.pathname.split("/").pop() || "/";
   const lastModified = new Date(document.lastModified).toLocaleString();
   const isDark = document.body.classList.contains("dark");
@@ -145,10 +143,11 @@ function renderFooter(site, currentPage = "") {
       <div class="footer-brand">
         <span class="footer-brand-icon" aria-hidden="true">${iconTreeCeltic()}</span>
         <div class="footer-brand-text">
-          <p class="footer-name">${escapeHtml(name)}</p>
+           <p class="footer-name">${escapeHtml(footerName)}</p>
           <p class="footer-tagline">
             <span class="footer-tagline-lg">${escapeHtml(tagline)}</span>
-            <span class="footer-tagline-sm">CS Student · Cybersecurity · Blockchain · Cryptography</span>
+            <span class="footer-tagline-sm">CS Student & Researcher · CPS · ICS Security · ML</span>
+            <span class="footer-tagline-uni">BRAC University</span>
           </p>
         </div>
       </div>
@@ -163,7 +162,7 @@ function renderFooter(site, currentPage = "") {
       <div class="footer-status" aria-label="System status">
         <div class="footer-status-text">
           <p class="footer-label"><span class="footer-dot footer-dot--pulse" aria-hidden="true"></span>System Status</p>
-          <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> whoami <span class="term-sep" aria-hidden="true">→</span> <span class="term-value"><span class="term-who-lg">${escapeHtml(name)}</span><span class="term-who-sm">Himel</span></span></p>
+          <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> whoami <span class="term-sep" aria-hidden="true">→</span> <span class="term-value"><span class="term-who-lg">Himel Kabir</span><span class="term-who-sm">Himel Kabir</span></span></p>
           <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> locate <span class="term-sep" aria-hidden="true">→</span> <span class="term-value">${escapeHtml(path)}</span></p>
           <p class="term-line"><span class="term-prompt" aria-hidden="true">$</span> theme <span class="term-sep" aria-hidden="true">→</span> <span class="term-value term-theme">${isDark ? "dark" : "light"}</span><span class="term-cursor" aria-hidden="true">▍</span></p>
         </div>
@@ -273,7 +272,7 @@ function renderHero(personal, meta, home) {
   const highlight = (personal?.highlight || "").trim() || "Himel";
   const role =
     (personal?.role || "").trim() ||
-    "Computer Science · Cybersecurity · Blockchain · Cryptography";
+    "Computer Science Student & Researcher @ BRAC University";
   const bio =
     (personal?.bio || "").trim() ||
     "From research and security systems to interactive digital experiences, I like turning complex ideas into things that are useful, understandable, and well-built.";
@@ -288,7 +287,10 @@ function renderHero(personal, meta, home) {
       <div class="home-hero-text reveal">
         <p class="home-hero-greeting">LET&rsquo;S OPT IN</p>
         <h1 class="home-hero-name">${nameHtml} <span class="highlight">${escapeHtml(highlight)}</span></h1>
-        <p class="home-hero-role" data-text="${escapeHtml(role)}">${escapeHtml(role)}</p>
+        <p class="home-hero-role" data-text="${escapeHtml(role)}">
+          <span class="home-hero-role-main">Computer Science Student & Researcher</span><span class="home-hero-role-at"> @ BRAC University</span>
+        </p>
+        <p class="home-hero-role-line2">Cyber-Physical Systems · ICS Security · Machine Learning</p>
         <p class="home-hero-bio">${escapeHtml(bio)}</p>
         <div class="home-hero-actions">
           <a href="work.html" class="btn btn-primary">Explore Work</a>

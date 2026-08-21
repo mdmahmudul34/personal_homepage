@@ -3016,6 +3016,28 @@ body:not(.dark) .footer-tagline .footer-tagline-sm {
   display: none;
 }
 
+/* University line beneath the footer tagline. */
+.footer-tagline-uni {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--footer-tagline);
+  opacity: var(--footer-tagline-opacity);
+  font-size: 0.85rem;
+}
+
+body:not(.dark) .footer-tagline .footer-tagline-uni {
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 232, 165, 0.95) 0%,
+    var(--footer-tagline) 55%,
+    #a87c2f 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 2px rgba(245, 220, 130, 0.3), 0 0 5px rgba(245, 220, 130, 0.15);
+}
+
 .footer-label {
   margin: 0 0 0.6rem;
   font-family: var(--font-mono);
@@ -3248,6 +3270,7 @@ body:not(.dark) .footer-tagline .footer-tagline-sm {
   .footer-tagline {
     flex: 0 0 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin-top: 0;
   }
@@ -3265,6 +3288,14 @@ body:not(.dark) .footer-tagline .footer-tagline-sm {
     display: block;
     font-size: 0.66rem;
     line-height: 1.2;
+    flex: 0 0 100%;
+    text-align: center;
+  }
+  .footer-tagline-uni {
+    font-size: 0.66rem;
+    line-height: 1.2;
+    flex: 0 0 100%;
+    text-align: center;
   }
 
   .footer-links {
@@ -4592,6 +4623,39 @@ body:not(.dark) .page-header > p:not(.page-intro) {
 /* Dark mode — subtle pastel glow on the role text. */
 .dark .home-hero .home-hero-role {
   text-shadow: 0 0 8px rgba(230, 230, 250, 0.4), 0 0 18px rgba(230, 230, 250, 0.2), 0 0 36px rgba(230, 230, 250, 0.1);
+}
+
+/* Desktop: role parts stay inline. */
+.home-hero-role-main,
+.home-hero-role-at {
+  display: inline;
+}
+
+/* Phone view: stack role parts on separate lines. */
+@media (max-width: 680px) {
+  .home-hero-role-main,
+  .home-hero-role-at {
+    display: block;
+  }
+}
+
+/* Smaller second role line beneath the hero role. */
+.home-hero-role-line2 {
+  margin: 0 0 0.35rem;
+  font-family: 'Agu Display', 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-variation-settings: "MORF" 20;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: #F3E9A8;
+  opacity: 0.95;
+  text-shadow: 0 0 8px rgba(165, 214, 167, 0.55), 0 0 18px rgba(165, 214, 167, 0.3), 0 0 36px rgba(165, 214, 167, 0.15);
+  transform: translateY(-4px);
+}
+
+body:not(.dark) .home-hero .home-hero-role-line2 {
+  color: #F3E9A8;
+  text-shadow: 0 0 8px rgba(255, 253, 166, 0.7), 0 0 18px rgba(255, 253, 166, 0.45), 0 0 36px rgba(255, 253, 166, 0.25), 0 0 72px rgba(255, 253, 166, 0.12);
 }
 
 /* Hero CTA — reuse the site's established button language as-is (no new
